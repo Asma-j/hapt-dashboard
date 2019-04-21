@@ -8,7 +8,6 @@ import {
     NavItem,
     NavLink  } from 'reactstrap';
 import BrandLogo from '../atoms/BrandLogo';
-import { userInfo } from 'os';
 
 class Header extends Component {
     constructor(props) {
