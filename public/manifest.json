@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "HAPT Application",
+  "name": "A web application to manage HAPT business",
   "icons": [
     {
       "src": "favicon.ico",
