@@ -8,11 +8,11 @@ import {
     NavItem,
     NavLink  } from 'reactstrap';
 import BrandLogo from '../atoms/BrandLogo';
+import UserDefaultAvatar from '../../assets/images/user-13.svg';
 
 class Header extends Component {
     constructor(props) {
       super(props);
-  
       this.toggle = this.toggle.bind(this);
       this.state = {
         isOpen: false
@@ -26,7 +26,7 @@ class Header extends Component {
     
   render() {
     return (
-        <Navbar color="light" light expand="md">
+        <Navbar color="light" light expand="md" className="shadow-1">
           <NavbarBrand href="/">
             <BrandLogo />
           </NavbarBrand>
@@ -42,7 +42,10 @@ class Header extends Component {
                     <NavLink href="/settings">Settings</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="/account">{`${this.props.user.firstName} ${this.props.user.lastName} `}</NavLink>
+                    <NavLink href="/account">
+                    |
+                    <img src={this.props.user.avatar || UserDefaultAvatar} alt="User Avatar" className="img-avatar" />
+                    {this.props.user.firstName}</NavLink>
                   </NavItem>
                 </Nav>
               </Collapse>

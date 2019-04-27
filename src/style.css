@@ -14,7 +14,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #bbb;
+    background-color: rgba(252, 218, 49, 0.2);
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
@@ -26,7 +26,6 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #fff;
     text-align: center;
     color: rgba(0,0,0,.5);
     font-size: 1rem;
@@ -35,3 +34,19 @@ body {
     padding: 5px 0;
   }
   
+  .shadow-1 {
+    box-shadow: 0px 1px 10px #e6e6e6;
+  }
+
+  .bg-hapt-red {
+    background-color: rgba(166, 8, 43, 0.2)
+  }
+
+  .img-avatar {
+    width: 32px;
+    max-width: 100%;
+    height: auto;
+    border: 1px lightgray solid;
+    border-radius: 50%;
+    margin: 0 15px 0 15px;
+  }
