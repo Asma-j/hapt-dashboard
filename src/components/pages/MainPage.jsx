@@ -23,7 +23,7 @@ class Main extends Component {
     return (
       <Fragment>
         <Header user={loggedInUser}/>
-        <Container className="pt-5">
+        <Container style={{padding: '2vh'}}>
           <Row>
             <Col>
               <SectionCard image={Student} title="Students"/>
