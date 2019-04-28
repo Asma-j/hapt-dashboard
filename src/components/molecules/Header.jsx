@@ -12,34 +12,41 @@ class Header extends Component {
       isOpen: false
     };
   }
+
   toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }));
   }
 
   render() {
+    const { user } = this.props;
+    const { isOpen } = this.state;
     return (
       <Navbar color="light" light expand="md" className="shadow-1">
-        <NavbarBrand href="/">
+        <NavbarBrand tag={Link} to="/">
           <BrandLogo />
         </NavbarBrand>
-        {this.props.user && (
+        {user && (
           <Fragment>
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+            <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
+                  <NavLink tag={Link} to="/">
+                    Home
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/settings">Settings</NavLink>
+                  <NavLink tag={Link} to="/settings">
+                    Settings
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/account">
+                  <NavLink tag={Link} to="/account">
                     |
-                    <img src={this.props.user.avatar || UserDefaultAvatar} alt="User Avatar" className="img-avatar" />
-                    {this.props.user.firstName}
+                    <img src={user.avatar || UserDefaultAvatar} alt="User Avatar" className="img-avatar" />
+                    {user.firstName}
                   </NavLink>
                 </NavItem>
               </Nav>

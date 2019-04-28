@@ -15,14 +15,28 @@ import Certificat from '../../assets/images/handshake.svg';
 import Session from '../../assets/images/startup.svg';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: null
+    };
+  }
+
+  componentWillMount() {
+    this.setState({
+      currentUser: null
+    });
+  }
+
   render() {
+    const { currentUser } = this.state;
     return (
       <Fragment>
-        <Header user={this.props.loggedInUser} />
+        <Header user={currentUser} />
         <Container style={{ padding: '2vh' }}>
           <Row>
             <Col>
-              <Link to={'/students'}>
+              <Link to="/students">
                 <SectionCard image={Student} title="Students" />
               </Link>
             </Col>
@@ -35,7 +49,7 @@ class Main extends Component {
           </Row>
           <Row>
             <Col>
-              <Link to={'/courses'}>
+              <Link to="/courses">
                 <SectionCard image={Course} title="Courses" />
               </Link>
             </Col>

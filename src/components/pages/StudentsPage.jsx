@@ -69,12 +69,12 @@ class StudentsPage extends Component {
                       </tr>
                     ))
                   ) : (
-                        <tr>
-                          <td colSpan="5" style={{ textAlign: 'center' }}>
-                            No data found...
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: 'center' }}>
+                        No data found...
                       </td>
-                        </tr>
-                      )}
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </CardBody>
