@@ -6,6 +6,7 @@ import { getAllFormations } from '../../api/formations';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
+import CourseEditModal from '../molecules/modals/CourseEditModal';
 
 const user = {
   firstName: 'Malek',
@@ -70,6 +71,7 @@ class CoursesPage extends Component {
                         <td>{`${course.tutor.firstName} ${course.tutor.lastName}`}</td>
                         <td>{course.formation.title}</td>
                         <td style={{ textAlign: 'right' }}>
+                          <CourseEditModal course={course} formations={formations} />
                           <Button color="danger" size="sm" outline>
                             <i className="fas fa-trash" /> Delete
                           </Button>
