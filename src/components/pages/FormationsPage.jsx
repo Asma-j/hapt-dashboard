@@ -2,7 +2,7 @@
 
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, Button } from 'reactstrap';
-import { getAllformations } from '../../api/formations';
+import { getAllFormations } from '../../api/formations';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 const user = {
@@ -21,7 +21,7 @@ class FormationsPage extends Component {
 
   componentWillMount() {
     this.setState({
-      formations: getAllformations(),
+      formations: getAllFormations(),
       currentUser: user
     });
   }
@@ -38,7 +38,7 @@ class FormationsPage extends Component {
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <h2>Formations</h2>
-                  <h6 className="text-muted" />
+                  <h6 className="text-muted">Our formations guides include information.</h6>
                 </div>
                 <div>
                   <Button color="success" outline onClick="addformation()">

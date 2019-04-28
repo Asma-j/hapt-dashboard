@@ -2,14 +2,16 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, Button } from 'reactstrap';
 import { getAllCourses } from '../../api/courses';
+import { getAllFormations } from '../../api/formations';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
+import CourseAddModal from '../molecules/modals/CourseAddModal';
 
 const user = {
-  firstName: "Malek",
-  lastrName: "Boubakri",
-  avatar: "https://avatars0.githubusercontent.com/u/22925467?s=460&v=4"
-}
+  firstName: 'Malek',
+  lastrName: 'Boubakri',
+  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
+};
 
 class CoursesPage extends Component {
   constructor(props) {
@@ -23,12 +25,13 @@ class CoursesPage extends Component {
   componentWillMount() {
     this.setState({
       courses: getAllCourses(),
+      formations: getAllFormations(),
       currentUser: user
     });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, courses, formations } = this.state;
     return (
       <Fragment>
         <Header user={currentUser} />
@@ -40,11 +43,7 @@ class CoursesPage extends Component {
                   <h2>Courses</h2>
                   <h6 className="text-muted">Our subject guides include information.</h6>
                 </div>
-                <div>
-                  <Button color="success" outline>
-                    <i className="fas fa-plus" /> Add course
-                  </Button>
-                </div>
+                <CourseAddModal formations={formations} />
               </div>
               <Table bordered striped hover responsive>
                 <thead>
@@ -57,14 +56,14 @@ class CoursesPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.courses ? (
+                  {!courses ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.courses.length > 0 ? (
-                    this.state.courses.map(course => (
+                  ) : courses.length > 0 ? (
+                    courses.map(course => (
                       <tr>
                         <td>{course.number.toString().padStart(4, '0')}</td>
                         <td>{course.title}</td>

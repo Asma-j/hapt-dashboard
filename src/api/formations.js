@@ -23,12 +23,12 @@ const formations = [
   }
 ];
 
-export function getAllformations() {
+export function getAllFormations() {
   return localStorage.getItem('formations') || formations;
 }
 
 export function addformation(formation) {
-  const oldformations = getAllformations();
+  const oldformations = getAllFormations();
   oldformations.push(formation);
   localStorage.setItem('formations', oldformations);
 }
