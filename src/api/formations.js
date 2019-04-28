@@ -1,27 +1,4 @@
-const formations = [
-  {
-    number: 1,
-    title: 'MERN Stack',
-    tutor: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
-    },
-    cours: [
-      {
-        number: 1,
-        title: 'Reactjs introduction'
-      },
-      {
-        number: 2,
-        title: 'React-router'
-      },
-      {
-        number: 3,
-        title: 'Redux'
-      }
-    ]
-  }
-];
+import { formations } from '../utils/fakeData';
 
 export function getAllFormations() {
   return localStorage.getItem('formations') || formations;

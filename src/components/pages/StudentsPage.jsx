@@ -5,37 +5,30 @@ import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
 
-
-
 const user = {
-  firstName: "Malek",
-  lastrName: "Boubakri",
-  avatar: "https://avatars0.githubusercontent.com/u/22925467?s=460&v=4"
-}
-
-
-
+  firstName: 'Malek',
+  lastrName: 'Boubakri',
+  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
+};
 
 class StudentsPage extends Component {
   constructor(props) {
     super(props);
-    this.state = ({
+    this.state = {
       students: null,
       currentUser: null
-
-    });
+    };
   }
 
   componentWillMount() {
     this.setState({
       students: getAllStudents(),
       currentUser: user
-
     });
   }
 
   render() {
-    const { currentUser } = this.state
+    const { currentUser } = this.state;
     return (
       <Fragment>
         <Header user={currentUser} />
@@ -46,8 +39,6 @@ class StudentsPage extends Component {
                 <div>
                   <h2>Students</h2>
                   <h6 className="text-muted">Our subject guides include information.</h6>
-
-
                 </div>
                 <div>
                   <StudentAddModal user={user} />
@@ -86,12 +77,12 @@ class StudentsPage extends Component {
                       </tr>
                     ))
                   ) : (
-                        <tr>
-                          <td colSpan="5" style={{ textAlign: 'center' }}>
-                            No data found...
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: 'center' }}>
+                        No data found...
                       </td>
-                        </tr>
-                      )}
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </CardBody>

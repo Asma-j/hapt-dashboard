@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
@@ -42,46 +41,46 @@ class Main extends Component {
         <Container style={{ padding: '2vh' }}>
           <Row>
             <Col>
-              <Link to="/students">
-                <SectionCard image={Student} title="Students" />
-              </Link>
+              <SectionCard image={Student} title="Students" link="/students" />
             </Col>
             <Col>
-              <SectionCard image={Trainer} title="Trainers" />
+              <SectionCard image={Trainer} title="Trainers" link="/trainers" disabled />
             </Col>
             <Col>
-              <SectionCard image={Classrooms} title="Classrooms" />
+              <SectionCard image={Classrooms} title="Classrooms" link="/classrooms" disabled />
             </Col>
           </Row>
           <Row>
             <Col>
-              <Link to="/courses">
-                <SectionCard image={Course} title="Courses" />
-              </Link>
+              <SectionCard image={Course} title="Courses" link="/courses" />
             </Col>
             <Col>
-              <SectionCard image={Session} title="Sessions" />
+              <SectionCard image={Session} title="Sessions" link="/sessions" disabled />
             </Col>
             <Col>
-              <SectionCard image={Certificat} title="Certificats" />
+              <SectionCard image={Calendar} title="Calendars" link="/calendars" disabled />
             </Col>
           </Row>
           <Row>
             <Col>
-              <Link to="/formations">
-                <SectionCard image={Session} title="Formations" />
-              </Link>
+              <SectionCard image={Session} title="Formations" link="/formations" />
+            </Col>
+            <Col>
+              <SectionCard image={Session} title="Tests" link="/tests" disabled />
+            </Col>
+            <Col>
+              <SectionCard image={Certificat} title="Certificates" link="/certificates" disabled />
             </Col>
           </Row>
           <Row>
             <Col>
-              <SectionCard image={Calendar} title="Calendars" />
+              <SectionCard image={Certificat} title="Inscriptions" link="/inscriptions" disabled />
             </Col>
             <Col>
-              <SectionCard image={Payment} title="Payments" />
+              <SectionCard image={Payment} title="Payments" link="/payments" disabled />
             </Col>
             <Col>
-              <SectionCard image={Settings} title="Settings" />
+              <SectionCard image={Settings} title="Settings" link="/settings" disabled />
             </Col>
           </Row>
         </Container>

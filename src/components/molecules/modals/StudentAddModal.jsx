@@ -38,8 +38,7 @@ class StudentAddModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input type="text" name="email" id="email" placeholder="Enter the Email..">
-                </Input>
+                <Input type="text" name="email" id="email" placeholder="Enter the Email.." />
               </FormGroup>
             </Form>
           </ModalBody>

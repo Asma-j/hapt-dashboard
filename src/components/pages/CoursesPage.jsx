@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button } from 'reactstrap';
+import { Container, Table, Card, CardBody, Button, ButtonGroup } from 'reactstrap';
 import { getAllCourses } from '../../api/courses';
 import { getAllFormations } from '../../api/formations';
 import Header from '../molecules/Header';
@@ -71,10 +71,12 @@ class CoursesPage extends Component {
                         <td>{`${course.tutor.firstName} ${course.tutor.lastName}`}</td>
                         <td>{course.formation.title}</td>
                         <td style={{ textAlign: 'right' }}>
-                          <CourseEditModal course={course} formations={formations} />
-                          <Button color="danger" size="sm" outline>
-                            <i className="fas fa-trash" /> Delete
-                          </Button>
+                          <ButtonGroup>
+                            <CourseEditModal course={course} formations={formations} />
+                            <Button color="danger" size="sm" outline>
+                              <i className="fas fa-trash" /> Delete
+                            </Button>
+                          </ButtonGroup>
                         </td>
                       </tr>
                     ))

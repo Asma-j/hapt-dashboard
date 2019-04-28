@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { capitaliseString } from '../../../utils/tools';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -13,6 +14,24 @@ class CourseEditModal extends Component {
     };
   }
 
+  handleChangeTitle = event => {
+    this.setState({
+      title: capitaliseString(event.target.value)
+    });
+  };
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleOnSubmit = async event => {
+    const { title, tutor, formation } = this.state;
+    event.preventDefault();
+    await this.editCourse({ title, tutor, formation });
+  };
+
   handleOpenClose() {
     const { formations, course } = this.props;
     this.setState(prevState => ({
@@ -24,17 +43,19 @@ class CourseEditModal extends Component {
   }
 
   render() {
-    const { isOpen } = this.state;
+    const { isOpen, title, tutor, formation } = this.state;
     const { course, formations } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
           <i className="fas fa-edit" /> Edit
         </Button>
-        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Edit course: {course.title}</ModalHeader>
-          <ModalBody>
-            <Form>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+            <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
+              Edit course: {course.title}
+            </ModalHeader>
+            <ModalBody>
               <FormGroup>
                 <Label for="title">Title</Label>
                 <Input
@@ -42,7 +63,8 @@ class CourseEditModal extends Component {
                   name="title"
                   id="title"
                   placeholder="Enter the course's title.."
-                  value={this.state.title}
+                  value={title}
+                  onChange={this.handleChangeTitle}
                 />
               </FormGroup>
               <FormGroup>
@@ -52,7 +74,8 @@ class CourseEditModal extends Component {
                   name="tutor"
                   id="tutor"
                   placeholder="Enter the course's tutor.."
-                  value={this.state.tutor}
+                  value={tutor}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
@@ -62,24 +85,25 @@ class CourseEditModal extends Component {
                   name="title"
                   id="title"
                   placeholder="Enter the course title.."
-                  value={this.state.formation}
+                  value={formation}
+                  onChange={this.handleChange}
                 >
-                  {formations.map(formation => (
-                    <option value={formation.number}>{formation.title}</option>
+                  {formations.map(forma => (
+                    <option value={forma.number}>{forma.title}</option>
                   ))}
                 </Input>
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.handleOpenClose}>
-              Cancel
-            </Button>
-            <Button color="warning" onClick={this.handleOpenClose}>
-              Edit
-            </Button>
-          </ModalFooter>
-        </Modal>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.handleOpenClose}>
+                Cancel
+              </Button>
+              <Button color="warning" onClick={this.handleOpenClose}>
+                <i className="fas fa-edit" /> Edit
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </Form>
       </Fragment>
     );
   }

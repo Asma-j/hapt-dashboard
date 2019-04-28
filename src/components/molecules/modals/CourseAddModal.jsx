@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { capitaliseString } from '../../../utils/tools';
 
 class CourseAddModal extends Component {
   constructor(props) {
@@ -13,6 +14,37 @@ class CourseAddModal extends Component {
     };
   }
 
+  /**
+   * @description This method makes it straightforward to modify or validate specific user input,
+   * example we tried to capitalize the first character of the name.
+   * @param event launched on form changing.
+   */
+  handleChangeTitle = event => {
+    this.setState({
+      title: capitaliseString(event.target.value)
+    });
+  };
+
+  /**
+   * @description This method makes it straightforward to modify any user input.
+   * @param event launched on form changing.
+   */
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  /**
+   * @description This method save the new data and prevent the default page refresh.
+   * @param event launched on form submitting.
+   */
+  handleOnSubmit = async event => {
+    const { title, tutor, formation } = this.state;
+    event.preventDefault();
+    await this.addCourse({ title, tutor, formation });
+  };
+
   handleOpenClose() {
     const { formations } = this.props;
     this.setState(prevState => ({
@@ -23,13 +55,6 @@ class CourseAddModal extends Component {
     }));
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-
   render() {
     const { isOpen, title, tutor, formation } = this.state;
     const { formations } = this.props;
@@ -38,10 +63,12 @@ class CourseAddModal extends Component {
         <Button color="success" onClick={this.handleOpenClose} outline>
           <i className="fas fa-plus" /> Add course
         </Button>
-        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
-          <ModalBody>
-          <Form>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+            <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
+              Add course
+            </ModalHeader>
+            <ModalBody>
               <FormGroup>
                 <Label for="title">Title</Label>
                 <Input
@@ -50,7 +77,7 @@ class CourseAddModal extends Component {
                   id="title"
                   placeholder="Enter the course's title.."
                   value={title}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeTitle}
                 />
               </FormGroup>
               <FormGroup>
@@ -79,17 +106,17 @@ class CourseAddModal extends Component {
                   ))}
                 </Input>
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.handleOpenClose}>
-              Cancel
-            </Button>
-            <Button color="success" onClick={this.handleOpenClose}>
-              Add
-            </Button>
-          </ModalFooter>
-        </Modal>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.handleOpenClose}>
+                Cancel
+              </Button>
+              <Button color="success" onClick={this.handleOpenClose}>
+                <i className="fas fa-plus" /> Add
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </Form>
       </div>
     );
   }
