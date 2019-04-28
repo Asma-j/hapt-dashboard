@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, Button } from 'reactstrap';
 import { getAllCourses } from '../../api/courses';

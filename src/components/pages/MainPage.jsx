@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
@@ -21,7 +22,9 @@ class Main extends Component {
         <Container style={{ padding: '2vh' }}>
           <Row>
             <Col>
-              <SectionCard image={Student} title="Students" />
+              <Link to={'/students'}>
+                <SectionCard image={Student} title="Students" />
+              </Link>
             </Col>
             <Col>
               <SectionCard image={Trainer} title="Trainers" />
@@ -32,7 +35,9 @@ class Main extends Component {
           </Row>
           <Row>
             <Col>
-              <SectionCard image={Course} title="Courses" />
+              <Link to={'/courses'}>
+                <SectionCard image={Course} title="Courses" />
+              </Link>
             </Col>
             <Col>
               <SectionCard image={Session} title="Sessions" />
