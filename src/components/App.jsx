@@ -3,12 +3,14 @@ import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import CoursesPage from './pages/CoursesPage';
 
-class App extends Component {
+const user = {
+  firstName: 'Malek',
+  lastName: 'Boubakri'
+};
 
+class App extends Component {
   render() {
-    return (
-      <CoursesPage />
-    );
+    return <CoursesPage loggedInUser={user} />;
   }
 }
 

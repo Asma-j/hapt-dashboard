@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Header from '../molecules/Header'
-import Footer from '../molecules/Footer'
+import Header from '../molecules/Header';
+import Footer from '../molecules/Footer';
 import SectionCard from '../atoms/SectionCard';
 import Student from '../../assets/images/user-5.svg';
 import Trainer from '../../assets/images/user-4.svg';
@@ -13,20 +13,15 @@ import Course from '../../assets/images/bar-chart.svg';
 import Certificat from '../../assets/images/handshake.svg';
 import Session from '../../assets/images/startup.svg';
 
-const loggedInUser = {
-  firstName: 'Malek',
-  lastName: 'Boubakri'
-}
-
 class Main extends Component {
   render() {
     return (
       <Fragment>
-        <Header user={loggedInUser}/>
-        <Container style={{padding: '2vh'}}>
+        <Header user={this.props.loggedInUser} />
+        <Container style={{ padding: '2vh' }}>
           <Row>
             <Col>
-              <SectionCard image={Student} title="Students"/>
+              <SectionCard image={Student} title="Students" />
             </Col>
             <Col>
               <SectionCard image={Trainer} title="Trainers" />

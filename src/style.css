@@ -1,52 +1,51 @@
 @charset "UTF-8";
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,700,800,900,400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic, 700, 800, 900, 400, 400italic);
 
 html {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    background-color: rgba(252, 218, 49, 0.2);
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(252, 218, 49, 0.2);
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    color: rgba(0,0,0,.5);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 5px 0;
-  }
-  
-  .shadow-1 {
-    box-shadow: 0px 1px 10px #e6e6e6;
-  }
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 5px 0;
+}
 
-  .bg-hapt-red {
-    background-color: rgba(166, 8, 43, 0.2)
-  }
+.shadow-1 {
+  box-shadow: 0px 1px 10px #e6e6e6;
+}
 
-  .img-avatar {
-    width: 32px;
-    max-width: 100%;
-    height: auto;
-    border: 1px lightgray solid;
-    border-radius: 50%;
-    margin: 0 15px 0 15px;
-  }
+.bg-hapt-red {
+  background-color: rgba(166, 8, 43, 0.2);
+}
+
+.img-avatar {
+  width: 32px;
+  max-width: 100%;
+  height: auto;
+  border: 1px lightgray solid;
+  border-radius: 50%;
+  margin: 0 15px 0 15px;
+}
