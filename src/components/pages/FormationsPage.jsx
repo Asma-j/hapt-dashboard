@@ -5,36 +5,44 @@ import { Container, Table, Card, CardBody, Button } from 'reactstrap';
 import { getAllformations } from '../../api/formations';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
-
+const user = {
+  firstName: 'Malek',
+  lastrName: 'Boubakri',
+  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
+};
 class FormationsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formations: null
+      formations: null,
+      currentUser: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      formations: getAllformations()
+      formations: getAllformations(),
+      currentUser: user
     });
   }
 
   render() {
+    const { currentUser } = this.state;
+
     return (
       <Fragment>
-        <Header user={this.props.loggedInUser} />
+        <Header user={currentUser} />
         <Container style={{ padding: '2vh' }}>
           <Card>
             <CardBody>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <h2>Formations</h2>
-                  <h6 className="text-muted">Our subject guides include information.</h6>
+                  <h6 className="text-muted" />
                 </div>
                 <div>
-                  <Button color="success" outline>
-                    <i className="fas fa-plus" /> Add course
+                  <Button color="success" outline onClick="addformation()">
+                    <i className="fas fa-plus" /> Add Formation
                   </Button>
                 </div>
               </div>

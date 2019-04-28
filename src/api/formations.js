@@ -27,7 +27,7 @@ export function getAllformations() {
   return localStorage.getItem('formations') || formations;
 }
 
-export function addCourse(formation) {
+export function addformation(formation) {
   const oldformations = getAllformations();
   oldformations.push(formation);
   localStorage.setItem('formations', oldformations);
