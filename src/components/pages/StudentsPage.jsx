@@ -4,7 +4,7 @@ import { getAllStudents } from '../../api/students';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 
-class UsersPage extends Component {
+class StudentsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,4 +86,4 @@ class UsersPage extends Component {
   }
 }
 
-export default UsersPage;
+export default StudentsPage;
