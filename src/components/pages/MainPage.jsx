@@ -14,6 +14,12 @@ import Course from '../../assets/images/bar-chart.svg';
 import Certificat from '../../assets/images/handshake.svg';
 import Session from '../../assets/images/startup.svg';
 
+const user = {
+  firstName: 'Malek',
+  lastrName: 'Boubakri',
+  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
+};
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +30,7 @@ class Main extends Component {
 
   componentWillMount() {
     this.setState({
-      currentUser: null
+      currentUser: user
     });
   }
 
@@ -58,6 +64,13 @@ class Main extends Component {
             </Col>
             <Col>
               <SectionCard image={Certificat} title="Certificats" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Link to="/formations">
+                <SectionCard image={Session} title="Formations" />
+              </Link>
             </Col>
           </Row>
           <Row>
