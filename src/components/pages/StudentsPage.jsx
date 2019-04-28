@@ -3,6 +3,7 @@ import { Container, Table, Card, CardBody, Button } from 'reactstrap';
 import { getAllStudents } from '../../api/students';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
+import StudentAddModal from '../molecules/modals/StudentAddModal';
 
 
 
@@ -45,11 +46,11 @@ class StudentsPage extends Component {
                 <div>
                   <h2>Students</h2>
                   <h6 className="text-muted">Our subject guides include information.</h6>
+
+
                 </div>
                 <div>
-                  <Button color="success" outline>
-                    <i className="fas fa-plus" /> Add user
-                  </Button>
+                  <StudentAddModal user={user} />
                 </div>
               </div>
               <Table bordered striped hover responsive>
