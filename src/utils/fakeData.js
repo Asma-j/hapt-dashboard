@@ -45,7 +45,7 @@ export const formations = [
       firstName: 'Malek',
       lastName: 'Boubakri'
     },
-    cours: [
+    course: [
       {
         number: 1,
         title: 'Reactjs introduction'

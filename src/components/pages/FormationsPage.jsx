@@ -1,10 +1,14 @@
 /* eslint-disable no-nested-ternary */
 
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button } from 'reactstrap';
+import { Container, Table, Card, CardBody, Button, ButtonGroup } from 'reactstrap';
 import { getAllFormations } from '../../api/formations';
+import { getAllCourses } from '../../api/courses';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
+import FormationAddModal from '../molecules/modals/FormationAddModal';
+import FormationEditModal from '../molecules/modals/FormationEditModal';
+
 const user = {
   firstName: 'Malek',
   lastrName: 'Boubakri',
@@ -22,12 +26,13 @@ class FormationsPage extends Component {
   componentWillMount() {
     this.setState({
       formations: getAllFormations(),
+      course: getAllCourses(),
       currentUser: user
     });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, formations, course } = this.state;
 
     return (
       <Fragment>
@@ -41,9 +46,7 @@ class FormationsPage extends Component {
                   <h6 className="text-muted">Our formations guides include information.</h6>
                 </div>
                 <div>
-                  <Button color="success" outline onClick="addformation()">
-                    <i className="fas fa-plus" /> Add Formation
-                  </Button>
+                  <FormationAddModal />
                 </div>
               </div>
               <Table bordered striped hover responsive>
@@ -57,23 +60,30 @@ class FormationsPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.formations ? (
+                  {!formations ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.formations.length > 0 ? (
-                    this.state.formations.map(formation => (
+                  ) : formations.length > 0 ? (
+                    formations.map(formation => (
                       <tr>
                         <td>{formation.number.toString().padStart(4, '0')}</td>
                         <td>{formation.title}</td>
                         <td>{`${formation.tutor.firstName} ${formation.tutor.lastName}`}</td>
-                        <td>{formation.cours.map(cour => cour.title + ', ')}</td>
+                        <td>{formation.course.map(cour => cour.title + ', ')}</td>
+
                         <td style={{ textAlign: 'right' }}>
-                          <Button color="danger" size="sm" outline>
-                            <i className="fas fa-trash" /> Delete
-                          </Button>
+                          <ButtonGroup>
+                            <FormationEditModal formations={formations} />
+                            <Button color="success" size="sm" outline>
+                              <i className="fas fa-plus" /> Course
+                            </Button>
+                            <Button color="danger" size="sm" outline>
+                              <i className="fas fa-trash" /> Delete
+                            </Button>
+                          </ButtonGroup>
                         </td>
                       </tr>
                     ))
