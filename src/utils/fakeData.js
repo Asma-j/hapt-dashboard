@@ -59,6 +59,14 @@ export const formations = [
         title: 'Redux'
       }
     ]
+  },
+  {
+    number: 2,
+    title: 'MEAN Stack',
+    tutor: {
+      firstName: 'Malek',
+      lastName: 'Boubakri'
+    }
   }
 ];
 

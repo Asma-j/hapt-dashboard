@@ -33,18 +33,18 @@ class FormationEditModal extends Component {
   };
 
   handleOpenClose() {
-    const { formations } = this.props;
+    const { formation } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      title: formations.title,
-      tutor: formations.tutor,
-      course: formations.course
+      title: formation.title,
+      tutor: formation.tutor,
+      course: formation.course
     }));
   }
 
   render() {
     const { isOpen, title, tutor, course } = this.state;
-    const { formations } = this.props;
+    const { formation } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -53,7 +53,7 @@ class FormationEditModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-              Edit Formation : {formations.title}
+              Edit Formation : {formation.title}
             </ModalHeader>
             <ModalBody>
               <FormGroup>

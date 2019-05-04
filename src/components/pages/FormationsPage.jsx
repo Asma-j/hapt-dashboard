@@ -8,6 +8,7 @@ import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import FormationAddModal from '../molecules/modals/FormationAddModal';
 import FormationEditModal from '../molecules/modals/FormationEditModal';
+import CourseAddModal from '../molecules/modals/CourseAddModal';
 
 const user = {
   firstName: 'Malek',
@@ -26,13 +27,12 @@ class FormationsPage extends Component {
   componentWillMount() {
     this.setState({
       formations: getAllFormations(),
-      course: getAllCourses(),
       currentUser: user
     });
   }
 
   render() {
-    const { currentUser, formations, course } = this.state;
+    const { currentUser, formations } = this.state;
 
     return (
       <Fragment>
@@ -72,14 +72,16 @@ class FormationsPage extends Component {
                         <td>{formation.number.toString().padStart(4, '0')}</td>
                         <td>{formation.title}</td>
                         <td>{`${formation.tutor.firstName} ${formation.tutor.lastName}`}</td>
-                        <td>{formation.course.map(cour => cour.title + ', ')}</td>
+                        <td>
+                          {formation.course && formation.course.length > 1
+                            ? formation.course.map(cour => cour.title + ', ')
+                            : 'No courses for this training...'}
+                        </td>
 
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
-                            <FormationEditModal formations={formations} />
-                            <Button color="success" size="sm" outline>
-                              <i className="fas fa-plus" /> Course
-                            </Button>
+                            <FormationEditModal formation={formation} />
+                            <CourseAddModal formations={formations} formation={formation} />
                             <Button color="danger" size="sm" outline>
                               <i className="fas fa-trash" /> Delete
                             </Button>

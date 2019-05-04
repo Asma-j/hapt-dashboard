@@ -46,21 +46,21 @@ class CourseAddModal extends Component {
   };
 
   handleOpenClose() {
-    const { formations } = this.props;
+    const { formations, formation } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      formation: formations && formations.length > 0 ? formations[0] : ''
+      formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation } = this.state;
-    const { formations } = this.props;
+    const { isOpen, title, tutor } = this.state;
+    const { formations, formation } = this.props;
     return (
       <div>
-        <Button color="success" onClick={this.handleOpenClose} outline>
+        <Button color="success" size={formation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
           <i className="fas fa-plus" /> Add course
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
