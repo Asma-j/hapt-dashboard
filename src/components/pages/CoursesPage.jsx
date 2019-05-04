@@ -7,6 +7,7 @@ import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
+import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
 
 const user = {
   firstName: 'Malek',
@@ -73,9 +74,7 @@ class CoursesPage extends Component {
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
                             <CourseEditModal course={course} formations={formations} />
-                            <Button color="danger" size="sm" outline>
-                              <i className="fas fa-trash" /> Delete
-                            </Button>
+                            <CourseDeleteModal course={course} />
                           </ButtonGroup>
                         </td>
                       </tr>
