@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
 
-class CourseAddModal extends Component {
+class FormationEditModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -10,63 +10,50 @@ class CourseAddModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null
+      course: null
     };
   }
 
-  /**
-   * @description This method makes it straightforward to modify or validate specific user input,
-   * example we tried to capitalize the first character of the name.
-   * @param event launched on form changing.
-   */
   handleChangeTitle = event => {
     this.setState({
       title: capitaliseString(event.target.value)
     });
   };
 
-  /**
-   * @description This method makes it straightforward to modify any user input.
-   * @param event launched on form changing.
-   */
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
-  /**
-   * @description This method save the new data and prevent the default page refresh.
-   * @param event launched on form submitting.
-   */
   handleOnSubmit = async event => {
-    const { title, tutor, formation } = this.state;
+    const { title, tutor, course } = this.state;
     event.preventDefault();
-    await this.addCourse({ title, tutor, formation });
+    await this.editFormation({ title, tutor, course });
   };
 
   handleOpenClose() {
-    const { formations, formation } = this.props;
+    const { formation } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      title: '',
-      tutor: '',
-      formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
+      title: formation.title,
+      tutor: formation.tutor,
+      course: formation.course
     }));
   }
 
   render() {
-    const { isOpen, title, tutor } = this.state;
-    const { formations, formation } = this.props;
+    const { isOpen, title, tutor, course } = this.state;
+    const { formation } = this.props;
     return (
-      <div>
-        <Button color="success" size={formation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
-          <i className="fas fa-plus" /> Add course
+      <Fragment>
+        <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
+          <i className="fas fa-edit" /> Edit
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-            <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-              Add course
+            <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
+              Edit Formation : {formation.title}
             </ModalHeader>
             <ModalBody>
               <FormGroup>
@@ -75,7 +62,7 @@ class CourseAddModal extends Component {
                   type="text"
                   name="title"
                   id="title"
-                  placeholder="Enter the course's title.."
+                  placeholder="Enter the formation's title.."
                   value={title}
                   onChange={this.handleChangeTitle}
                 />
@@ -86,40 +73,36 @@ class CourseAddModal extends Component {
                   type="text"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the course's tutor.."
+                  placeholder="Enter the formation's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="formation">Formation</Label>
+                <Label for="courses">Course</Label>
                 <Input
-                  type="select"
-                  name="title"
-                  id="title"
-                  placeholder="Enter the course title.."
-                  value={formation}
+                  type="stext"
+                  name="courses"
+                  id="courses"
+                  placeholder="Enter the course name.."
+                  value={course}
                   onChange={this.handleChange}
-                >
-                  {formations.map(forma => (
-                    <option value={forma.number}>{forma.title}</option>
-                  ))}
-                </Input>
+                />
               </FormGroup>
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="success" onClick={this.handleOpenClose}>
-                <i className="fas fa-plus" /> Add
+              <Button color="warning" onClick={this.handleOpenClose}>
+                <i className="fas fa-edit" /> Edit
               </Button>
             </ModalFooter>
           </Modal>
         </Form>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default CourseAddModal;
+export default FormationEditModal;

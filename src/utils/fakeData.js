@@ -45,7 +45,7 @@ export const formations = [
       firstName: 'Malek',
       lastName: 'Boubakri'
     },
-    cours: [
+    course: [
       {
         number: 1,
         title: 'Reactjs introduction'
@@ -59,6 +59,14 @@ export const formations = [
         title: 'Redux'
       }
     ]
+  },
+  {
+    number: 2,
+    title: 'MEAN Stack',
+    tutor: {
+      firstName: 'Malek',
+      lastName: 'Boubakri'
+    }
   }
 ];
 
