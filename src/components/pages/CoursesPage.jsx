@@ -1,20 +1,17 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button, ButtonGroup } from 'reactstrap';
+import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
 import { getAllCourses } from '../../api/courses';
 import { getAllFormations } from '../../api/formations';
+
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
 import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
-
 const user = {
-  firstName: 'Malek',
-  lastrName: 'Boubakri',
-  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
+  firstName: 'malek'
 };
-
 class CoursesPage extends Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
+import { getAllTrainers } from '../../api/trainers';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class CourseEditModal extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: course.title,
-      tutor: course.tutor,
+      tutor: course.tutor.number,
       formation: formations && formations.length > 0 ? formations[0] : ''
     }));
   }
@@ -65,17 +66,21 @@ class CourseEditModal extends Component {
                   placeholder="Enter the course's title.."
                   value={title}
                   onChange={this.handleChangeTitle}
+                 
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="tutor"
                   id="tutor"
                   placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
+                  {gehtAllTrainers().map(forma => (
+                    <option value={forma.number}>{forma.title}</option>
+                  ))}
                 />
               </FormGroup>
               <FormGroup>
