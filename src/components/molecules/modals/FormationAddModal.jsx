@@ -42,7 +42,7 @@ class FormationAddModal extends Component {
    * @param event launched on form submitting.
    */
   handleOnSubmit = async event => {
-    const { title, tutor, course } = this.state;
+    const { title, tutor } = this.state;
     event.preventDefault();
     await this.addFormation({ title, tutor });
   };
@@ -94,17 +94,6 @@ class FormationAddModal extends Component {
                     <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
                   ))}
                 </Input>
-              </FormGroup>
-              <FormGroup>
-                <Label for="Course">Course</Label>
-                <Input
-                  type="text"
-                  name="Course"
-                  id="Course"
-                  value={course}
-                  placeholder="Enter the formation's course.."
-                  onChange={this.handleChange}
-                />
               </FormGroup>
             </ModalBody>
             <ModalFooter>
