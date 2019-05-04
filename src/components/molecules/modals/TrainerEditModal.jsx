@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class TrainerAddModal extends Component {
+class TrainerEditModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -20,8 +20,8 @@ class TrainerAddModal extends Component {
     const { isOpen } = this.state;
     return (
       <div>
-        <Button color="success" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-plus" /> Add Trainer
+        <Button color="warning" onClick={this.handleOpenClose} outline>
+          <i className="fas fa-edit" /> Edit Trainer
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
@@ -46,7 +46,7 @@ class TrainerAddModal extends Component {
               Cancel
             </Button>
             <Button color="success" onClick={this.handleOpenClose}>
-              Add
+              Edit
             </Button>
           </ModalFooter>
         </Modal>
@@ -55,4 +55,4 @@ class TrainerAddModal extends Component {
   }
 }
 
-export default TrainerAddModal;
+export default TrainerEditModal;

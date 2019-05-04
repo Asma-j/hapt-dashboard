@@ -5,6 +5,9 @@ import { getAllTrainers } from '../../api/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
+import TrainerDeleteModal from '../molecules/modals/TrainerAddModal';
+
+TrainerDeleteModal;
 
 const user = {
   firstName: 'Malek',
@@ -70,9 +73,10 @@ class TrainersPage extends Component {
                         <td>{trainer.lastName}</td>
                         <td>{trainer.email}</td>
                         <td style={{ textAlign: 'right' }}>
-                          <Button color="danger" size="sm" outline>
-                            <i className="fas fa-trash" /> Delete
-                          </Button>
+                          <ButtonGroup>
+                            <TrainerEditModal />
+                            <TrainerDeleteModal />
+                          </ButtonGroup>
                         </td>
                       </tr>
                     ))
