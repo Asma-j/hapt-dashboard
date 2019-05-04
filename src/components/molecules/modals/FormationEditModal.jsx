@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
+import { getAllTrainers } from '../../../api/trainers';
 
 class FormationEditModal extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class FormationEditModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      course: null
+      course: null,
+      trainers: [],
     };
   }
 
@@ -37,13 +39,14 @@ class FormationEditModal extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: formation.title,
-      tutor: formation.tutor,
-      course: formation.course
+      tutor: formation.tutor.number,
+      course: formation.course,
+      trainers: getAllTrainers()
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, course } = this.state;
+    const { isOpen, title, tutor, trainers } = this.state;
     const { formation } = this.props;
     return (
       <Fragment>
@@ -68,26 +71,18 @@ class FormationEditModal extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="tutor">Tutor</Label>
+                <Label for="trainer">Tutor</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="tutor"
-                  id="tutor"
-                  placeholder="Enter the formation's tutor.."
+                  id="number"
                   value={tutor}
                   onChange={this.handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="courses">Course</Label>
-                <Input
-                  type="stext"
-                  name="courses"
-                  id="courses"
-                  placeholder="Enter the course name.."
-                  value={course}
-                  onChange={this.handleChange}
-                />
+                >
+                  {trainers.map(trainer => (
+                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                  ))}
+                </Input>
               </FormGroup>
             </ModalBody>
             <ModalFooter>

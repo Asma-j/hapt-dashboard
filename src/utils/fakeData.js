@@ -42,6 +42,7 @@ export const formations = [
     number: 1,
     title: 'MERN Stack',
     tutor: {
+      number: 1,
       firstName: 'Malek',
       lastName: 'Boubakri'
     },
@@ -64,8 +65,9 @@ export const formations = [
     number: 2,
     title: 'MEAN Stack',
     tutor: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
+      number: 2,
+      firstName: 'Zaki',
+      lastName: 'Meddeb'
     }
   }
 ];

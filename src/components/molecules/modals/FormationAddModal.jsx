@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { getAllTrainers } from '../../../api/trainers';
 import { capitaliseString } from '../../../utils/tools';
 
 class FormationAddModal extends Component {
@@ -10,7 +11,8 @@ class FormationAddModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      course: null
+      course: null,
+      trainers: [],
     };
   }
 
@@ -50,12 +52,13 @@ class FormationAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      course: ''
+      course: '',
+      trainers: getAllTrainers(),
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, course } = this.state;
+    const { isOpen, title, tutor, course, trainers } = this.state;
     return (
       <div>
         <Button color="success" onClick={this.handleOpenClose} outline>
@@ -81,13 +84,16 @@ class FormationAddModal extends Component {
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the formation's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
-                />
+                >
+                  {trainers.map(trainer => (
+                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                  ))}
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Label for="Course">Course</Label>
