@@ -74,38 +74,55 @@ export const students = [
   {
     number: 1,
     student: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
+      firstName: 'Foulan',
+      lastName: 'Foulani'
     },
-
-    email: 'emai1@gmail.com'
+    email: 'faltan@gmail.com'
   },
   {
     number: 2,
     student: {
-      firstName: 'Malek',
+      firstName: 'Nour',
       lastName: 'Boubakri'
     },
-
     email: 'emai1@gmail.com'
   },
   {
     number: 3,
     student: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
+      firstName: 'Med Ali',
+      lastName: 'Ezzedine'
     },
-
-    email: 'emai1@gmail.com'
+    email: 'xdaly@gmail.com'
   },
-
   {
-    number: 3,
+    number: 4,
     student: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
+      firstName: 'Hamdi',
+      lastName: 'Sioud'
     },
-
-    email: 'emai13@gmail.com'
+    email: 'hamdi@gmail.com'
   }
+];
+
+
+export const trainers = [
+  {
+    number: 1,
+    student: {
+      firstName: 'Malek',
+      lastName: 'Boubakri'
+    },
+
+    email: 'malekbouba@gmail.com'
+  },
+  {
+    number: 2,
+    student: {
+      firstName: 'Zaki',
+      lastName: 'Meddeb'
+    },
+
+    email: 'zakimdb@gmail.com'
+  },
 ];
