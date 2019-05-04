@@ -3,6 +3,7 @@ export const courses = [
     number: 1,
     title: 'Reactjs introduction',
     tutor: {
+      number: 1,
       firstName: 'Malek',
       lastName: 'Boubakri'
     },
@@ -15,8 +16,9 @@ export const courses = [
     number: 2,
     title: 'React-router',
     tutor: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
+      number: 2,
+      firstName: 'Zaki',
+      lastName: 'Meddeb'
     },
     formation: {
       number: 1,
@@ -27,6 +29,7 @@ export const courses = [
     number: 3,
     title: 'Redux',
     tutor: {
+      number: 1,
       firstName: 'Malek',
       lastName: 'Boubakri'
     },

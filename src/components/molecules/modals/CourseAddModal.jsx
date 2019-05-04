@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
+import { getAllTrainers } from '../../../api/trainers';
 
 class CourseAddModal extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class CourseAddModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null
+      formation: null,
+      trainers: []
     };
   }
 
@@ -52,16 +54,13 @@ class CourseAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      formation: formation 
-      ? formation.number 
-      : formations && formations.length > 0 
-        ? formations[0].number
-        : ''
+      trainers: getAllTrainers(),
+      formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation } = this.state;
+    const { isOpen, title, tutor, formation, trainers } = this.state;
     const { formations, formation: selectedFormation } = this.props;
     return (
       <div>
@@ -88,13 +87,19 @@ class CourseAddModal extends Component {
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="tutor"
                   id="tutor"
                   placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
-                />
+                >
+                  {trainers.map(trainer => (
+                    <option value={trainer.number}>
+                      {trainer.firstName} {trainer.lastName}
+                    </option>
+                  ))}
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Label for="formation">Formation</Label>
