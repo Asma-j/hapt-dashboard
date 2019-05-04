@@ -73,56 +73,41 @@ export const formations = [
 export const students = [
   {
     number: 1,
-    student: {
-      firstName: 'Foulan',
-      lastName: 'Foulani'
-    },
+    firstName: 'Foulan',
+    lastName: 'Foulani',
     email: 'faltan@gmail.com'
   },
   {
     number: 2,
-    student: {
-      firstName: 'Nour',
-      lastName: 'Boubakri'
-    },
+    firstName: 'Nour',
+    lastName: 'Boubakri',
     email: 'emai1@gmail.com'
   },
   {
     number: 3,
-    student: {
-      firstName: 'Med Ali',
-      lastName: 'Ezzedine'
-    },
+    firstName: 'Med Ali',
+    lastName: 'Ezzedine',
     email: 'xdaly@gmail.com'
   },
   {
     number: 4,
-    student: {
-      firstName: 'Hamdi',
-      lastName: 'Sioud'
-    },
+    firstName: 'Hamdi',
+    lastName: 'Sioud',
     email: 'hamdi@gmail.com'
   }
 ];
 
-
 export const trainers = [
   {
     number: 1,
-    student: {
-      firstName: 'Malek',
-      lastName: 'Boubakri'
-    },
-
+    firstName: 'Malek',
+    lastName: 'Boubakri',
     email: 'malekbouba@gmail.com'
   },
   {
     number: 2,
-    student: {
-      firstName: 'Zaki',
-      lastName: 'Meddeb'
-    },
-
+    firstName: 'Zaki',
+    lastName: 'Meddeb',
     email: 'zakimdb@gmail.com'
-  },
+  }
 ];

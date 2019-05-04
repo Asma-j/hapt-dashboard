@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage';
 import CoursesPage from './pages/CoursesPage';
 import FormationsPage from './pages/FormationsPage';
 import StudentsPage from './pages/StudentsPage';
+import TrainersPage from './pages/TrainersPage';
 
 const App = () => (
   <Router>
@@ -13,6 +14,7 @@ const App = () => (
       <Route exact path="/courses" component={CoursesPage} />
       <Route exact path="/formations" component={FormationsPage} />
       <Route exact path="/students" component={StudentsPage} />
+      <Route exact path="/trainers" component={TrainersPage} />
       <Route exact path="/login" component={LoginPage} />
     </Fragment>
   </Router>

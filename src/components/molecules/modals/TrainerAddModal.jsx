@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class StudentAddModal extends Component {
+class TrainerAddModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -55,4 +55,4 @@ class StudentAddModal extends Component {
   }
 }
 
-export default StudentAddModal;
+export default TrainerAddModal;
