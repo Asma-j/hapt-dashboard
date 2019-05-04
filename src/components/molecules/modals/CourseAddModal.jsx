@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
@@ -51,16 +52,20 @@ class CourseAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
+      formation: formation 
+      ? formation.number 
+      : formations && formations.length > 0 
+        ? formations[0].number
+        : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor } = this.state;
-    const { formations, formation } = this.props;
+    const { isOpen, title, tutor, formation } = this.state;
+    const { formations, formation: selectedFormation } = this.props;
     return (
       <div>
-        <Button color="success" size={formation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
+        <Button color="success" size={selectedFormation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
           <i className="fas fa-plus" /> Add course
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
@@ -95,8 +100,9 @@ class CourseAddModal extends Component {
                 <Label for="formation">Formation</Label>
                 <Input
                   type="select"
-                  name="title"
+                  name="formation"
                   id="title"
+                  disabled={selectedFormation}
                   placeholder="Enter the course title.."
                   value={formation}
                   onChange={this.handleChange}

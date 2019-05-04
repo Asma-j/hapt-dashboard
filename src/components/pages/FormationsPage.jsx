@@ -3,11 +3,11 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, Button, ButtonGroup } from 'reactstrap';
 import { getAllFormations } from '../../api/formations';
-import { getAllCourses } from '../../api/courses';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import FormationAddModal from '../molecules/modals/FormationAddModal';
 import FormationEditModal from '../molecules/modals/FormationEditModal';
+import FormationDeleteModal from '../molecules/modals/FormationDeleteModal';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 
 const user = {
@@ -74,17 +74,14 @@ class FormationsPage extends Component {
                         <td>{`${formation.tutor.firstName} ${formation.tutor.lastName}`}</td>
                         <td>
                           {formation.course && formation.course.length > 1
-                            ? formation.course.map(cour => cour.title + ', ')
+                            ? formation.course.map(cour => `${cour.title}, `)
                             : 'No courses for this training...'}
                         </td>
-
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
                             <FormationEditModal formation={formation} />
                             <CourseAddModal formations={formations} formation={formation} />
-                            <Button color="danger" size="sm" outline>
-                              <i className="fas fa-trash" /> Delete
-                            </Button>
+                            <FormationDeleteModal formation={formation} />
                           </ButtonGroup>
                         </td>
                       </tr>
