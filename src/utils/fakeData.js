@@ -37,7 +37,20 @@ export const courses = [
       number: 1,
       title: 'MERN Stack'
     }
-  }
+  },
+  {
+    number: 4,
+    title: 'Angular introduction',
+    tutor: {
+      number: 2,
+      firstName: 'Zaki',
+      lastName: 'Meddeb'
+    },
+    formation: {
+      number: 2,
+      title: 'MEAN Stack'
+    }
+  },
 ];
 
 export const formations = [

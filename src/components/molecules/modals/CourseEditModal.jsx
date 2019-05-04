@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
 import { getAllTrainers } from '../../../api/trainers';
+import { getAllFormations } from '../../../api/formations';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class CourseEditModal extends Component {
       title: null,
       tutor: null,
       formation: null,
+      formations: [],
       trainers: []
     };
   }
@@ -35,19 +37,20 @@ class CourseEditModal extends Component {
   };
 
   handleOpenClose() {
-    const { formations, course } = this.props;
+    const { course } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: course.title,
       tutor: course.tutor.number,
+      formation: course.formation.number,
       trainers: getAllTrainers(),
-      formation: formations && formations.length > 0 ? formations[0] : ''
+      formations: getAllFormations(),
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation, trainers } = this.state;
-    const { course, formations } = this.props;
+    const { isOpen, title, tutor, formation, trainers, formations } = this.state;
+    const { course } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -91,8 +94,8 @@ class CourseEditModal extends Component {
                 <Label for="formation">Formation</Label>
                 <Input
                   type="select"
-                  name="title"
-                  id="title"
+                  name="formation"
+                  id="formation"
                   placeholder="Enter the course title.."
                   value={formation}
                   onChange={this.handleChange}

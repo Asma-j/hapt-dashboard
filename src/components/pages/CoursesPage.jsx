@@ -2,13 +2,12 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
 import { getAllCourses } from '../../api/courses';
-import { getAllFormations } from '../../api/formations';
-
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
 import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
+
 const user = {
   firstName: 'malek'
 };
@@ -24,13 +23,12 @@ class CoursesPage extends Component {
   componentWillMount() {
     this.setState({
       courses: getAllCourses(),
-      formations: getAllFormations(),
       currentUser: user
     });
   }
 
   render() {
-    const { currentUser, courses, formations } = this.state;
+    const { currentUser, courses } = this.state;
     return (
       <Fragment>
         <Header user={currentUser} />
@@ -42,7 +40,7 @@ class CoursesPage extends Component {
                   <h2>Courses</h2>
                   <h6 className="text-muted">Our subject guides include information.</h6>
                 </div>
-                <CourseAddModal formations={formations} />
+                <CourseAddModal />
               </div>
               <Table bordered striped hover responsive>
                 <thead>
@@ -70,7 +68,7 @@ class CoursesPage extends Component {
                         <td>{course.formation.title}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
-                            <CourseEditModal course={course} formations={formations} />
+                            <CourseEditModal course={course} />
                             <CourseDeleteModal course={course} />
                           </ButtonGroup>
                         </td>

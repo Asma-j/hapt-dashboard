@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
 import { getAllTrainers } from '../../../api/trainers';
+import { getAllFormations } from '../../../api/formations';
 
 class CourseAddModal extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class CourseAddModal extends Component {
       title: null,
       tutor: null,
       formation: null,
+      formations: [],
       trainers: []
     };
   }
@@ -55,13 +57,14 @@ class CourseAddModal extends Component {
       title: '',
       tutor: '',
       trainers: getAllTrainers(),
+      formations: getAllFormations(),
       formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation, trainers } = this.state;
-    const { formations, formation: selectedFormation } = this.props;
+    const { isOpen, title, tutor, formation, formations, trainers } = this.state;
+    const { formation: selectedFormation } = this.props;
     return (
       <div>
         <Button color="success" size={selectedFormation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
