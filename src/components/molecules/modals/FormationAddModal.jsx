@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { getAllTrainers } from '../../../api/trainers';
 import { capitaliseString } from '../../../utils/tools';
 
 class FormationAddModal extends Component {
@@ -81,13 +82,16 @@ class FormationAddModal extends Component {
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the formation's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
-                />
+                >
+                  {getAllTrainers().map(trainer => (
+                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                  ))}
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Label for="Course">Course</Label>
