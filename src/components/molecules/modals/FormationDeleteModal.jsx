@@ -32,7 +32,7 @@ class FormationDeleteModal extends Component {
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            Delete Formation : {formation.title}
+            <b>Delete formation:</b> {formation.title}
           </ModalHeader>
           <ModalBody>Are you sure you want to delete this formation?</ModalBody>
           <ModalFooter>

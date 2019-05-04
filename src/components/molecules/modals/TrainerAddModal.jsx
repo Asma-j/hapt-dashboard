@@ -24,15 +24,17 @@ class TrainerAddModal extends Component {
           <i className="fas fa-plus" /> Add Trainer
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
+          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
+            <b>Add trianer</b>
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="firstname">FirstName</Label>
+                <Label for="firstname">Firstname</Label>
                 <Input type="text" name="firstname" id="firstname" placeholder="Enter the First Name.." />
               </FormGroup>
               <FormGroup>
-                <Label for="lastname">LastName</Label>
+                <Label for="lastname">Lastname</Label>
                 <Input type="text" name="lastname" id="lastname" placeholder="Enter the Last Name.." />
               </FormGroup>
               <FormGroup>

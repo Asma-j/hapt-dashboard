@@ -11,9 +11,9 @@ class StudentDeleteModal extends Component {
   }
 
   handleOnSubmit = async event => {
-    const { formation } = this.props;
+    const { student } = this.props;
     event.preventDefault();
-    await this.deleteFormation(formation);
+    await this.deleteStudent(student);
   };
 
   handleOpenClose() {
@@ -32,7 +32,7 @@ class StudentDeleteModal extends Component {
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            Delete student: {student.firstName} {student.lastName}
+            <b>Delete student:</b> {student.firstName} {student.lastName}
           </ModalHeader>
           <ModalBody>Are you sure you want to delete this student?</ModalBody>
           <ModalFooter>

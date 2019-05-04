@@ -6,38 +6,81 @@ class TrainerEditModal extends Component {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      firstName: '',
+      lastName: '',
+      email: ''
     };
   }
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleOnSubmit = async event => {
+    const { firstName, lastName, email } = this.state;
+    event.preventDefault();
+    await this.editTrainer({ firstName, lastName, email });
+  };
+
   handleOpenClose() {
+    const { trainer } = this.props;
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      isOpen: !prevState.isOpen,
+      firstName: trainer.firstName,
+      lastName: trainer.lastName,
+      email: trainer.email
     }));
   }
 
   render() {
-    const { isOpen } = this.state;
+    const { trainer } = this.props;
+    const { isOpen, firstName, lastName, email } = this.state;
     return (
       <div>
-        <Button color="warning" onClick={this.handleOpenClose} outline>
+        <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
           <i className="fas fa-edit" /> Edit Trainer
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
+          <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
+            <b>Edit trainer:</b> {trainer.firstName} {trainer.lastName}
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="firstname">FirstName</Label>
-                <Input type="text" name="firstname" id="firstname" placeholder="Enter the First Name.." />
+                <Label for="firstname">Firstname</Label>
+                <Input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  placeholder="Enter the Firstname.."
+                  value={firstName}
+                  onChange={this.handleChangeTitle}
+                />
               </FormGroup>
               <FormGroup>
-                <Label for="lastname">LastName</Label>
-                <Input type="text" name="lastname" id="lastname" placeholder="Enter the Last Name.." />
+                <Label for="lastname">Lastname</Label>
+                <Input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  placeholder="Enter the Lastname.."
+                  value={lastName}
+                  onChange={this.handleChangeTitle}
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input type="text" name="email" id="email" placeholder="Enter the Email.." />
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter the Email.."
+                  value={email}
+                  onChange={this.handleChangeTitle}
+                />
               </FormGroup>
             </Form>
           </ModalBody>
@@ -45,7 +88,7 @@ class TrainerEditModal extends Component {
             <Button color="secondary" onClick={this.handleOpenClose}>
               Cancel
             </Button>
-            <Button color="success" onClick={this.handleOpenClose}>
+            <Button color="warning" onClick={this.handleOpenClose}>
               Edit
             </Button>
           </ModalFooter>

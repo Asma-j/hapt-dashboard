@@ -1,13 +1,12 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button } from 'reactstrap';
+import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
 import { getAllTrainers } from '../../api/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
-import TrainerDeleteModal from '../molecules/modals/TrainerAddModal';
-
-TrainerDeleteModal;
+import TrainerEditModal from '../molecules/modals/TrainerEditModal';
+import TrainerDeleteModal from '../molecules/modals/TrainerDeleteModal';
 
 const user = {
   firstName: 'Malek',
@@ -74,8 +73,8 @@ class TrainersPage extends Component {
                         <td>{trainer.email}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
-                            <TrainerEditModal />
-                            <TrainerDeleteModal />
+                            <TrainerEditModal trainer={trainer} />
+                            <TrainerDeleteModal trainer={trainer} />
                           </ButtonGroup>
                         </td>
                       </tr>
