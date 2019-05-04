@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { capitaliseString } from '../../../utils/tools';
-import { getAllTrainers } from '../../api/trainers';
+import { getAllTrainers } from '../../../api/trainers';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class CourseEditModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null
+      formation: null,
+      trainers: []
     };
   }
 
@@ -39,12 +40,13 @@ class CourseEditModal extends Component {
       isOpen: !prevState.isOpen,
       title: course.title,
       tutor: course.tutor.number,
+      trainers: getAllTrainers(),
       formation: formations && formations.length > 0 ? formations[0] : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation } = this.state;
+    const { isOpen, title, tutor, formation, trainers } = this.state;
     const { course, formations } = this.props;
     return (
       <Fragment>
@@ -66,7 +68,6 @@ class CourseEditModal extends Component {
                   placeholder="Enter the course's title.."
                   value={title}
                   onChange={this.handleChangeTitle}
-                 
                 />
               </FormGroup>
               <FormGroup>
@@ -78,10 +79,13 @@ class CourseEditModal extends Component {
                   placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
-                  {gehtAllTrainers().map(forma => (
-                    <option value={forma.number}>{forma.title}</option>
+                >
+                  {trainers.map(trainer => (
+                    <option value={trainer.number}>
+                      {trainer.firstName} {trainer.lastName}
+                    </option>
                   ))}
-                />
+                </Input>
               </FormGroup>
               <FormGroup>
                 <Label for="formation">Formation</Label>
