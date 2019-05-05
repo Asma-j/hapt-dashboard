@@ -91,9 +91,9 @@ export const formations = [
 export const students = [
   {
     number: 1,
-    firstName: 'Foulan',
-    lastName: 'Foulani',
-    email: 'faltan@gmail.com'
+    firstName: 'Nader',
+    lastName: 'El Haj',
+    email: 'nader@gmail.com'
   },
   {
     number: 2,
@@ -104,7 +104,7 @@ export const students = [
   {
     number: 3,
     firstName: 'Med Ali',
-    lastName: 'Ezzedine',
+    lastName: 'Ezzeddine',
     email: 'xdaly@gmail.com'
   },
   {

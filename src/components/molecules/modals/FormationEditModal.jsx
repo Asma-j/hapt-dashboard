@@ -56,7 +56,7 @@ class FormationEditModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-              Edit Formation : {formation.title}
+              <b>Edit formation:</b> {formation.title}
             </ModalHeader>
             <ModalBody>
               <FormGroup>

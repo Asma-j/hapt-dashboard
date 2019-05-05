@@ -44,7 +44,7 @@ class CourseEditModal extends Component {
       tutor: course.tutor.number,
       formation: course.formation.number,
       trainers: getAllTrainers(),
-      formations: getAllFormations(),
+      formations: getAllFormations()
     }));
   }
 
@@ -59,7 +59,7 @@ class CourseEditModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-              Edit course: {course.title}
+              <b>Edit course:</b> {course.title}
             </ModalHeader>
             <ModalBody>
               <FormGroup>

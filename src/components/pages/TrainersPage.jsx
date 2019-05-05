@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
 import { getAllTrainers } from '../../api/trainers';

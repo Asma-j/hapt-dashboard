@@ -11,8 +11,7 @@ class FormationAddModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      course: null,
-      trainers: [],
+      trainers: []
     };
   }
 
@@ -42,7 +41,7 @@ class FormationAddModal extends Component {
    * @param event launched on form submitting.
    */
   handleOnSubmit = async event => {
-    const { title, tutor, course } = this.state;
+    const { title, tutor } = this.state;
     event.preventDefault();
     await this.addFormation({ title, tutor });
   };
@@ -52,13 +51,12 @@ class FormationAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      course: '',
-      trainers: getAllTrainers(),
+      trainers: getAllTrainers()
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, course, trainers } = this.state;
+    const { isOpen, title, tutor, trainers } = this.state;
     return (
       <div>
         <Button color="success" onClick={this.handleOpenClose} outline>
@@ -67,7 +65,7 @@ class FormationAddModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-              Add Formation
+              <b>Add formation</b>
             </ModalHeader>
             <ModalBody>
               <FormGroup>
@@ -83,28 +81,13 @@ class FormationAddModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
-                <Input
-                  type="select"
-                  name="tutor"
-                  id="tutor"
-                  value={tutor}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="tutor" id="tutor" value={tutor} onChange={this.handleChange}>
                   {trainers.map(trainer => (
-                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                    <option value={trainer.number}>
+                      {trainer.firstName} {trainer.lastName}
+                    </option>
                   ))}
                 </Input>
-              </FormGroup>
-              <FormGroup>
-                <Label for="Course">Course</Label>
-                <Input
-                  type="text"
-                  name="Course"
-                  id="Course"
-                  value={course}
-                  placeholder="Enter the formation's course.."
-                  onChange={this.handleChange}
-                />
               </FormGroup>
             </ModalBody>
             <ModalFooter>

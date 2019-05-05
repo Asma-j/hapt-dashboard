@@ -73,7 +73,7 @@ class CourseAddModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-              Add course
+              <b>Add course</b>
             </ModalHeader>
             <ModalBody>
               <FormGroup>

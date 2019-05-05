@@ -30,7 +30,9 @@ class TrainerAddModal extends Component {
           <i className="fas fa-plus" /> Add Trainer
         </Button>
         <Modal isOpen={isOpen} className="bg-success" toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
+          <ModalHeader toggle={this.handleOpenClose}>
+            <b>Add course</b>
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>

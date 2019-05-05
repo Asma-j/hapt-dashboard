@@ -13,7 +13,7 @@ class TrainerDeleteModal extends Component {
   handleOnSubmit = async event => {
     const { trainer } = this.props;
     event.preventDefault();
-    await this.deleteFormation(trainer);
+    await this.deleteTrainer(trainer);
   };
 
   handleOpenClose() {
@@ -32,7 +32,7 @@ class TrainerDeleteModal extends Component {
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            Delete Formation : {trainer.firstName} {trainer.lastName}
+            <b>Delete trainer:</b> {trainer.firstName} {trainer.lastName}
           </ModalHeader>
           <ModalBody>Are you sure you want to delete this trainer?</ModalBody>
           <ModalFooter>

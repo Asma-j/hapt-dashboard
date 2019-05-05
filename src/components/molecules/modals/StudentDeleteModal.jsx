@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-class FormationDeleteModal extends Component {
+class StudentDeleteModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -11,9 +11,9 @@ class FormationDeleteModal extends Component {
   }
 
   handleOnSubmit = async event => {
-    const { formation } = this.props;
+    const { student } = this.props;
     event.preventDefault();
-    await this.deleteFormation(formation);
+    await this.deleteStudent(student);
   };
 
   handleOpenClose() {
@@ -23,7 +23,7 @@ class FormationDeleteModal extends Component {
   }
 
   render() {
-    const { formation } = this.props;
+    const { student } = this.props;
     const { isOpen } = this.state;
     return (
       <Fragment>
@@ -32,9 +32,9 @@ class FormationDeleteModal extends Component {
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            <b>Delete formation:</b> {formation.title}
+            <b>Delete student:</b> {student.firstName} {student.lastName}
           </ModalHeader>
-          <ModalBody>Are you sure you want to delete this formation?</ModalBody>
+          <ModalBody>Are you sure you want to delete this student?</ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.handleOpenClose}>
               Cancel
@@ -49,4 +49,4 @@ class FormationDeleteModal extends Component {
   }
 }
 
-export default FormationDeleteModal;
+export default StudentDeleteModal;

@@ -24,7 +24,9 @@ class StudentAddModal extends Component {
           <i className="fas fa-plus" /> Add Student
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
+          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
+            <b>Add student</b>
+          </ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>

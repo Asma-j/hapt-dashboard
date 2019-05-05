@@ -1,10 +1,11 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
 import { Container, Table, Card, CardBody, Button } from 'reactstrap';
 import { getAllStudents } from '../../api/students';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
+import StudentDeleteModal from '../molecules/modals/StudentDeleteModal';
 
 const user = {
   firstName: 'Malek',
@@ -66,14 +67,11 @@ class StudentsPage extends Component {
                     this.state.students.map(student => (
                       <tr>
                         <td>{student.number.toString().padStart(1, '0')}</td>
-
                         <td>{student.firstName} </td>
                         <td>{student.lastName}</td>
                         <td>{student.email}</td>
                         <td style={{ textAlign: 'right' }}>
-                          <Button color="danger" size="sm" outline>
-                            <i className="fas fa-trash" /> Delete
-                          </Button>
+                          <StudentDeleteModal student={student} />
                         </td>
                       </tr>
                     ))
