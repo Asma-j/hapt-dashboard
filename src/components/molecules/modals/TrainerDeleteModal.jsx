@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class TrainerDeleteModal extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class TrainerDeleteModal extends Component {
     return (
       <Fragment>
         <Button color="danger" size="sm" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-trash" /> Delete
+          <FontAwesomeIcon icon="trash" /> Delete
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
@@ -40,7 +41,7 @@ class TrainerDeleteModal extends Component {
               Cancel
             </Button>
             <Button color="danger" onClick={this.handleOpenClose}>
-              <i className="fas fa-trash" /> Delete
+              <FontAwesomeIcon icon="trash" /> Delete
             </Button>
           </ModalFooter>
         </Modal>

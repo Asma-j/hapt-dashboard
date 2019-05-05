@@ -13,31 +13,20 @@ import Course from '../../assets/images/bar-chart.svg';
 import Certificat from '../../assets/images/handshake.svg';
 import Session from '../../assets/images/startup.svg';
 
-const user = {
-  firstName: 'Malek',
-  lastrName: 'Boubakri',
-  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
-};
-
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentUser: null
-    };
+    this.state = {};
   }
 
   componentWillMount() {
-    this.setState({
-      currentUser: user
-    });
+    this.setState({});
   }
 
   render() {
-    const { currentUser } = this.state;
     return (
       <Fragment>
-        <Header user={currentUser} />
+        <Header />
         <Container style={{ padding: '2vh' }}>
           <Row>
             <Col>

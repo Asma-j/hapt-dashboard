@@ -10,33 +10,25 @@ import FormationEditModal from '../molecules/modals/FormationEditModal';
 import FormationDeleteModal from '../molecules/modals/FormationDeleteModal';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 
-const user = {
-  firstName: 'Malek',
-  lastrName: 'Boubakri',
-  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
-};
 class FormationsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formations: null,
-      currentUser: null
+      formations: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      formations: getAllFormations(),
-      currentUser: user
+      formations: getAllFormations()
     });
   }
 
   render() {
-    const { currentUser, formations } = this.state;
-
+    const { formations } = this.state;
     return (
       <Fragment>
-        <Header user={currentUser} />
+        <Header />
         <Container style={{ padding: '2vh' }}>
           <Card>
             <CardBody>

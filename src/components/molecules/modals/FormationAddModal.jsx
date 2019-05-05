@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getAllTrainers } from '../../../api/trainers';
 import { capitaliseString } from '../../../utils/tools';
 
@@ -60,7 +61,7 @@ class FormationAddModal extends Component {
     return (
       <div>
         <Button color="success" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-plus" /> Add formation
+          <FontAwesomeIcon icon="plus" /> Add formation
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
@@ -95,7 +96,7 @@ class FormationAddModal extends Component {
                 Cancel
               </Button>
               <Button color="success" onClick={this.handleOpenClose}>
-                <i className="fas fa-plus" /> Add
+                <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
           </Modal>
