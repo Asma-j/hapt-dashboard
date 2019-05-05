@@ -33,7 +33,7 @@ class CourseDeleteModal extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
             <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            <b>Delete course:</b> {course.title}
+              <b>Delete course:</b> {course.title}
             </ModalHeader>
             <ModalBody>Are you sure you want to delete this course ?</ModalBody>
             <ModalFooter>

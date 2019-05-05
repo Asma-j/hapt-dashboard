@@ -12,7 +12,7 @@ class FormationEditModal extends Component {
       title: null,
       tutor: null,
       course: null,
-      trainers: [],
+      trainers: []
     };
   }
 
@@ -72,15 +72,11 @@ class FormationEditModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="trainer">Tutor</Label>
-                <Input
-                  type="select"
-                  name="tutor"
-                  id="number"
-                  value={tutor}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="tutor" id="number" value={tutor} onChange={this.handleChange}>
                   {trainers.map(trainer => (
-                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                    <option value={trainer.number}>
+                      {trainer.firstName} {trainer.lastName}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
