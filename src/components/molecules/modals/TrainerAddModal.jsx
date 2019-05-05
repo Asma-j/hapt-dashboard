@@ -30,8 +30,8 @@ class TrainerAddModal extends Component {
         <Button color="success" onClick={this.handleOpenClose} outline>
           <FontAwesomeIcon icon="plus" /> Add Trainer
         </Button>
-        <Modal isOpen={isOpen} className="bg-success" toggle={this.handleOpenClose}>
-          <ModalHeader toggle={this.handleOpenClose}>
+        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
             <b>Add course</b>
           </ModalHeader>
           <ModalBody>
