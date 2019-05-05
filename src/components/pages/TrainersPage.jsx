@@ -1,7 +1,8 @@
 /* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
-import { getAllTrainers } from '../../api/trainers';
+import { getAllTrainers } from '../../actions/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
@@ -16,9 +17,10 @@ class TrainersPage extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
+    await this.props.getAllTrainers();
     this.setState({
-      trainers: getAllTrainers()
+      trainers: this.props.trainers
     });
   }
 
@@ -89,4 +91,11 @@ class TrainersPage extends Component {
   }
 }
 
-export default TrainersPage;
+const mapStateToProps = store => ({
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllTrainers }
+)(TrainersPage);

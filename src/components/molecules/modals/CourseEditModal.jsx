@@ -1,10 +1,11 @@
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { capitaliseString } from '../../../utils/tools';
-import { getAllTrainers } from '../../../api/trainers';
-import { getAllFormations } from '../../../api/formations';
+import { editCourse } from '../../../actions/courses';
+import { getAllTrainers } from '../../../actions/trainers';
+import { getAllFormations } from '../../../actions/formations';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -14,9 +15,7 @@ class CourseEditModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null,
-      formations: [],
-      trainers: []
+      formation: null
     };
   }
 
@@ -35,7 +34,7 @@ class CourseEditModal extends Component {
   handleOnSubmit = async event => {
     const { title, tutor, formation } = this.state;
     event.preventDefault();
-    await this.editCourse({ title, tutor, formation });
+    await this.props.editCourse({ title, tutor, formation });
   };
 
   handleOpenClose() {
@@ -44,15 +43,13 @@ class CourseEditModal extends Component {
       isOpen: !prevState.isOpen,
       title: course.title,
       tutor: course.tutor.number,
-      formation: course.formation.number,
-      trainers: getAllTrainers(),
-      formations: getAllFormations()
+      formation: course.formation.number
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation, trainers, formations } = this.state;
-    const { course } = this.props;
+    const { isOpen, title, tutor, formation } = this.state;
+    const { course, trainers, formations } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -112,7 +109,7 @@ class CourseEditModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="warning" onClick={this.handleOpenClose}>
+              <Button type="submit" color="warning" disabled={!title || !tutor || !formation}>
                 <FontAwesomeIcon icon="edit" /> Edit
               </Button>
             </ModalFooter>
@@ -123,4 +120,12 @@ class CourseEditModal extends Component {
   }
 }
 
-export default CourseEditModal;
+const mapStateToProps = store => ({
+  formations: store.formations,
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { editCourse, getAllFormations, getAllTrainers }
+)(CourseEditModal);

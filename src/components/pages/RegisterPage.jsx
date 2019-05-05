@@ -21,7 +21,7 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
+    if (this.props.authentication.isAuthenticated) {
       this.props.history.push('/');
     }
   }
@@ -135,7 +135,7 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  authentication: state.authentication,
   errors: state.errors
 });
 

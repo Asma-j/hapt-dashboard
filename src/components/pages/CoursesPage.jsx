@@ -1,16 +1,14 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable no-nested-ternary,react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
-import { getAllCourses } from '../../api/courses';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
 import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
+import { getAllCourses } from '../../actions/courses';
 
-const user = {
-  firstName: 'malek'
-};
 class CoursesPage extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +17,10 @@ class CoursesPage extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
+    await this.props.getAllCourses();
     this.setState({
-      courses: getAllCourses()
+      courses: this.props.courses
     });
   }
 
@@ -38,7 +37,9 @@ class CoursesPage extends Component {
                   <h2>Courses</h2>
                   <h6 className="text-muted">Our subject guides include information.</h6>
                 </div>
-                <CourseAddModal />
+                <div>
+                  <CourseAddModal />
+                </div>
               </div>
               <Table bordered striped hover responsive>
                 <thead>
@@ -90,4 +91,11 @@ class CoursesPage extends Component {
   }
 }
 
-export default CoursesPage;
+const mapStateToProps = store => ({
+  courses: store.courses
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllCourses }
+)(CoursesPage);

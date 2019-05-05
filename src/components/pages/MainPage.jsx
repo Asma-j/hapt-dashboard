@@ -10,8 +10,10 @@ import Calendar from '../../assets/images/calendar.svg';
 import Settings from '../../assets/images/settings-1.svg';
 import Payment from '../../assets/images/dollar-symbol-1.svg';
 import Course from '../../assets/images/bar-chart.svg';
-import Certificat from '../../assets/images/handshake.svg';
+import Certificate from '../../assets/images/bill.svg';
+import Inscription from '../../assets/images/handshake.svg';
 import Session from '../../assets/images/startup.svg';
+import Test from '../../assets/images/laptop.svg';
 
 class Main extends Component {
   constructor(props) {
@@ -55,15 +57,15 @@ class Main extends Component {
               <SectionCard image={Session} title="Formations" link="/formations" />
             </Col>
             <Col>
-              <SectionCard image={Session} title="Tests" link="/tests" disabled />
+              <SectionCard image={Test} title="Tests" link="/tests" disabled />
             </Col>
             <Col>
-              <SectionCard image={Certificat} title="Certificates" link="/certificates" disabled />
+              <SectionCard image={Certificate} title="Certificates" link="/certificates" disabled />
             </Col>
           </Row>
           <Row>
             <Col>
-              <SectionCard image={Certificat} title="Inscriptions" link="/inscriptions" disabled />
+              <SectionCard image={Inscription} title="Inscriptions" link="/inscriptions" disabled />
             </Col>
             <Col>
               <SectionCard image={Payment} title="Payments" link="/payments" disabled />

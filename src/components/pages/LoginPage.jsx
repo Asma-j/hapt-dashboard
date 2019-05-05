@@ -19,13 +19,13 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
+    if (this.props.authentication.isAuthenticated) {
       this.props.history.push('/');
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+    if (nextProps.authentication.isAuthenticated) {
       this.props.history.push('/');
     }
     if (nextProps.errors) {
@@ -112,7 +112,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = store => ({
-  auth: store.auth,
+  authentication: store.authentication,
   errors: store.errors
 });
 

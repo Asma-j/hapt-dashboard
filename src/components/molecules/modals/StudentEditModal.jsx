@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { addTrainer, getAllTrainers } from '../../../actions/trainers';
+import { editStudent, getAllStudents } from '../../../actions/students';
 
-class TrainerAddModal extends Component {
+class StudentEditModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -27,21 +27,24 @@ class TrainerAddModal extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { firstName, lastName, email } = this.state;
-    this.props.addTrainer({
+    const { student } = this.props;
+    this.props.editStudent({
+      _id: student._id,
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
       email
     });
-    this.props.getAllTrainers();
+    this.props.getAllStudents();
     this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
+    const { student } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      firstName: '',
-      lastName: '',
-      email: ''
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email
     }));
   }
 
@@ -49,12 +52,12 @@ class TrainerAddModal extends Component {
     const { isOpen, firstName, lastName, email } = this.state;
     return (
       <Fragment>
-        <Button color="success" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Add trainer
+        <Button color="warning" onClick={this.handleOpenClose} outline>
+          <FontAwesomeIcon icon="plus" /> Add student
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-            <b>Add trainer</b>
+          <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
+            <b>Add student</b>
           </ModalHeader>
           <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
@@ -96,7 +99,7 @@ class TrainerAddModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button type="submit" color="success" disabled={!firstName || !lastName || !email}>
+              <Button type="submit" color="warning" disabled={!firstName || !lastName || !email}>
                 Add
               </Button>
             </ModalFooter>
@@ -108,10 +111,10 @@ class TrainerAddModal extends Component {
 }
 
 const mapStateToProps = store => ({
-  trainers: store.trainers
+  students: store.students
 });
 
 export default connect(
   mapStateToProps,
-  { addTrainer, getAllTrainers }
-)(TrainerAddModal);
+  { editStudent, getAllStudents }
+)(StudentEditModal);

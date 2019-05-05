@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { capitaliseString } from '../../../utils/tools';
-import { getAllTrainers } from '../../../api/trainers';
-import { getAllFormations } from '../../../api/formations';
+import { getAllTrainers } from '../../../actions/trainers';
+import { getAllFormations } from '../../../actions/formations';
 
 class CourseAddModal extends Component {
   constructor(props) {
@@ -15,9 +15,7 @@ class CourseAddModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null,
-      formations: [],
-      trainers: []
+      formation: null
     };
   }
 
@@ -58,25 +56,23 @@ class CourseAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      trainers: getAllTrainers(),
-      formations: getAllFormations(),
       formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation, formations, trainers } = this.state;
-    const { formation: selectedFormation } = this.props;
+    const { isOpen, title, tutor, formation } = this.state;
+    const { formation: selectedFormation, trainers, formations } = this.props;
     return (
-      <div>
+      <Fragment>
         <Button color="success" size={selectedFormation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
           <FontAwesomeIcon icon="plus" /> Add course
         </Button>
-        <Form onSubmit={this.handleOnSubmit}>
-          <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-            <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-              <b>Add course</b>
-            </ModalHeader>
+        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
+            <b>Add course</b>
+          </ModalHeader>
+          <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
               <FormGroup>
                 <Label for="title">Title</Label>
@@ -117,8 +113,10 @@ class CourseAddModal extends Component {
                   value={formation}
                   onChange={this.handleChange}
                 >
-                  {formations.map(forma => (
-                    <option value={forma.number}>{forma.title}</option>
+                  {formations.map(item => (
+                    <option key={item._id} value={item.number}>
+                      {item.title}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
@@ -127,15 +125,23 @@ class CourseAddModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="success" onClick={this.handleOpenClose}>
+              <Button color="success" onClick={this.handleOpenClose} disabled={!title || !tutor || !formation}>
                 <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
-          </Modal>
-        </Form>
-      </div>
+          </Form>
+        </Modal>
+      </Fragment>
     );
   }
 }
 
-export default CourseAddModal;
+const mapStateToProps = store => ({
+  formations: store.formations,
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllFormations, getAllTrainers }
+)(CourseAddModal);

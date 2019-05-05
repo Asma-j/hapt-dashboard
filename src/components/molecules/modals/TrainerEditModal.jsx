@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+/* eslint-disable react/destructuring-assignment */
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { capitaliseString } from '../../../utils/tools';
+import { editTrainer, getAllTrainers } from '../../../actions/trainers';
 
 class TrainerEditModal extends Component {
   constructor(props) {
@@ -20,10 +24,18 @@ class TrainerEditModal extends Component {
     });
   };
 
-  handleOnSubmit = async event => {
-    const { firstName, lastName, email } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
-    await this.editTrainer({ firstName, lastName, email });
+    const { firstName, lastName, email } = this.state;
+    const { trainer } = this.props;
+    this.props.editTrainer({
+      _id: trainer._id,
+      firstName: capitaliseString(firstName),
+      lastName: capitaliseString(lastName),
+      email
+    });
+    this.props.getAllTrainers();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
@@ -38,65 +50,71 @@ class TrainerEditModal extends Component {
 
   render() {
     const { isOpen, firstName, lastName, email } = this.state;
-    const { trainer } = this.props;
     return (
-      <div>
-        <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="edit" /> Edit Trainer
+      <Fragment>
+        <Button color="warning" onClick={this.handleOpenClose} outline>
+          <FontAwesomeIcon icon="plus" /> Add trainer
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-            <b>Edit trainer:</b> {trainer.firstName} {trainer.lastName}
+            <b>Add trainer</b>
           </ModalHeader>
-          <ModalBody>
-            <Form>
+          <Form onSubmit={this.handleOnSubmit}>
+            <ModalBody>
               <FormGroup>
-                <Label for="firstname">Firstname</Label>
+                <Label for="firstName">Firstname</Label>
                 <Input
                   type="text"
-                  name="firstname"
-                  id="firstname"
+                  name="firstName"
+                  id="firstName"
                   placeholder="Enter the Firstname.."
                   value={firstName}
-                  onChange={this.handleChangeTitle}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="lastname">Lastname</Label>
                 <Input
                   type="text"
-                  name="lastname"
-                  id="lastname"
+                  name="lastName"
+                  id="lastName"
                   placeholder="Enter the Lastname.."
                   value={lastName}
-                  onChange={this.handleChangeTitle}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input
-                  type="email"
+                  type="text"
                   name="email"
                   id="email"
-                  placeholder="Enter the Email.."
+                  placeholder="Enter an email.."
                   value={email}
-                  onChange={this.handleChangeTitle}
+                  onChange={this.handleChange}
                 />
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.handleOpenClose}>
-              Cancel
-            </Button>
-            <Button color="warning" onClick={this.handleOpenClose}>
-              Edit
-            </Button>
-          </ModalFooter>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.handleOpenClose}>
+                Cancel
+              </Button>
+              <Button type="submit" color="warning" disabled={!firstName || !lastName || !email}>
+                Add
+              </Button>
+            </ModalFooter>
+          </Form>
         </Modal>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default TrainerEditModal;
+const mapStateToProps = store => ({
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { editTrainer, getAllTrainers }
+)(TrainerEditModal);
