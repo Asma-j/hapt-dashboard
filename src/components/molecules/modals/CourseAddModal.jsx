@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { capitaliseString } from '../../../utils/tools';
 import { getAllTrainers } from '../../../api/trainers';
 import { getAllFormations } from '../../../api/formations';
@@ -68,7 +70,7 @@ class CourseAddModal extends Component {
     return (
       <div>
         <Button color="success" size={selectedFormation ? 'sm' : ''} onClick={this.handleOpenClose} outline>
-          <i className="fas fa-plus" /> Add course
+          <FontAwesomeIcon icon="plus" /> Add course
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
@@ -126,7 +128,7 @@ class CourseAddModal extends Component {
                 Cancel
               </Button>
               <Button color="success" onClick={this.handleOpenClose}>
-                <i className="fas fa-plus" /> Add
+                <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
           </Modal>

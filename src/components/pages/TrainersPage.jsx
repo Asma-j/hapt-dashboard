@@ -5,36 +5,28 @@ import { getAllTrainers } from '../../api/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
-import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 import TrainerDeleteModal from '../molecules/modals/TrainerDeleteModal';
-
-const user = {
-  firstName: 'Malek',
-  lastrName: 'Boubakri',
-  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
-};
+import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 
 class TrainersPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trainers: null,
-      currentUser: null
+      trainers: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      trainers: getAllTrainers(),
-      currentUser: user
+      trainers: getAllTrainers()
     });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { trainers } = this.state;
     return (
       <Fragment>
-        <Header user={currentUser} />
+        <Header />
         <Container style={{ padding: '2vh' }}>
           <Card>
             <CardBody>
@@ -44,7 +36,7 @@ class TrainersPage extends Component {
                   <h6 className="text-muted">Our trainers information.</h6>
                 </div>
                 <div>
-                  <TrainerAddModal user={user} />
+                  <TrainerAddModal />
                 </div>
               </div>
               <Table bordered striped hover responsive>
@@ -58,14 +50,14 @@ class TrainersPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.trainers ? (
+                  {!trainers ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.trainers.length > 0 ? (
-                    this.state.trainers.map(trainer => (
+                  ) : trainers.length > 0 ? (
+                    trainers.map(trainer => (
                       <tr>
                         <td>{trainer.number.toString().padStart(1, '0')}</td>
                         <td>{trainer.firstName} </td>

@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { getAllTrainers } from '../../../api/trainers';
 
@@ -12,7 +13,7 @@ class FormationEditModal extends Component {
       title: null,
       tutor: null,
       course: null,
-      trainers: [],
+      trainers: []
     };
   }
 
@@ -51,7 +52,7 @@ class FormationEditModal extends Component {
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-edit" /> Edit
+          <FontAwesomeIcon icon="edit" /> Edit
         </Button>
         <Form onSubmit={this.handleOnSubmit}>
           <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
@@ -72,15 +73,11 @@ class FormationEditModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="trainer">Tutor</Label>
-                <Input
-                  type="select"
-                  name="tutor"
-                  id="number"
-                  value={tutor}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="tutor" id="number" value={tutor} onChange={this.handleChange}>
                   {trainers.map(trainer => (
-                    <option value={trainer.number}>{trainer.firstName} {trainer.lastName}</option>
+                    <option value={trainer.number}>
+                      {trainer.firstName} {trainer.lastName}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
@@ -90,7 +87,7 @@ class FormationEditModal extends Component {
                 Cancel
               </Button>
               <Button color="warning" onClick={this.handleOpenClose}>
-                <i className="fas fa-edit" /> Edit
+                <FontAwesomeIcon icon="edit" /> Edit
               </Button>
             </ModalFooter>
           </Modal>

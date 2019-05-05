@@ -15,23 +15,21 @@ class CoursesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      courses: null,
-      currentUser: null
+      courses: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      courses: getAllCourses(),
-      currentUser: user
+      courses: getAllCourses()
     });
   }
 
   render() {
-    const { currentUser, courses } = this.state;
+    const { courses } = this.state;
     return (
       <Fragment>
-        <Header user={currentUser} />
+        <Header />
         <Container style={{ padding: '2vh' }}>
           <Card>
             <CardBody>

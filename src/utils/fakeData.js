@@ -50,7 +50,7 @@ export const courses = [
       number: 2,
       title: 'MEAN Stack'
     }
-  },
+  }
 ];
 
 export const formations = [

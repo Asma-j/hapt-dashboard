@@ -1,39 +1,30 @@
 /* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button } from 'reactstrap';
+import { Container, Table, Card, CardBody } from 'reactstrap';
 import { getAllStudents } from '../../api/students';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
 import StudentDeleteModal from '../molecules/modals/StudentDeleteModal';
 
-const user = {
-  firstName: 'Malek',
-  lastrName: 'Boubakri',
-  avatar: 'https://avatars0.githubusercontent.com/u/22925467?s=460&v=4'
-};
-
 class StudentsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: null,
-      currentUser: null
+      students: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      students: getAllStudents(),
-      currentUser: user
+      students: getAllStudents()
     });
   }
 
   render() {
-    const { currentUser } = this.state;
     return (
       <Fragment>
-        <Header user={currentUser} />
+        <Header />
         <Container style={{ padding: '2vh' }}>
           <Card>
             <CardBody>
@@ -43,7 +34,7 @@ class StudentsPage extends Component {
                   <h6 className="text-muted">Our students information.</h6>
                 </div>
                 <div>
-                  <StudentAddModal user={user} />
+                  <StudentAddModal />
                 </div>
               </div>
               <Table bordered striped hover responsive>

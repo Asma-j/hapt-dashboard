@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class StudentAddModal extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class StudentAddModal extends Component {
     return (
       <div>
         <Button color="success" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-plus" /> Add Student
+          <FontAwesomeIcon icon="plus" /> Add Student
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-success" toggle={this.handleOpenClose}>

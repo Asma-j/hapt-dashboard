@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class TrainerEditModal extends Component {
   constructor(props) {
@@ -7,9 +8,9 @@ class TrainerEditModal extends Component {
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
       isOpen: false,
-      firstName: '',
-      lastName: '',
-      email: ''
+      firstName: null,
+      lastName: null,
+      email: null
     };
   }
 
@@ -36,12 +37,12 @@ class TrainerEditModal extends Component {
   }
 
   render() {
-    const { trainer } = this.props;
     const { isOpen, firstName, lastName, email } = this.state;
+    const { trainer } = this.props;
     return (
       <div>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <i className="fas fa-edit" /> Edit Trainer
+          <FontAwesomeIcon icon="edit" /> Edit Trainer
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>

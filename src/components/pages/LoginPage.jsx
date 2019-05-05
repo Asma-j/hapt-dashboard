@@ -1,49 +1,57 @@
 import React, { Fragment, Component } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Card, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Alert, Card, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
-import { remoteAPI } from '../../utils/config';
+import { loginUser } from '../../actions/authentication';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errors: {}
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange = event => {
-    const { value, name } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
 
-  onSubmit = event => {
-    event.preventDefault();
-    const credentials = { email: this.state.email, password: this.state.password };
-    axios
-      .post(`${remoteAPI}/signin`, credentials, {
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => {
-        if (res.status === 200) {
-          console.log('Logging in successfully');
-          // this.props.history.push('/');
-        } else {
-          const error = new Error(res.data);
-          throw error;
-        }
-      })
-      .catch(err => {
-        console.warn('Error logging in please try again');
-        console.error(err);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/');
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
       });
-  };
+    }
+  }
+
+  handleInputChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.loginUser(user);
+  }
 
   render() {
+    const { errors } = this.state;
     return (
       <Fragment>
         <Header />
@@ -52,17 +60,19 @@ class Login extends Component {
             <Col md={{ size: 6, offset: 3 }}>
               <Card>
                 <CardBody>
-                  <Form onSubmit={this.onSubmit}>
+                  <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                       <Label for="email">Email</Label>
                       <Input
                         type="email"
                         name="email"
                         placeholder="Enter email"
+                        className={errors.code === 143 ? 'is-invalid' : ''}
                         value={this.state.email}
                         onChange={this.handleInputChange}
                         required
                       />
+                      {errors.code === 143 && <div className="invalid-feedback">{errors.error}</div>}
                     </FormGroup>
                     <FormGroup>
                       <Label for="password">Password</Label>
@@ -70,12 +80,25 @@ class Login extends Component {
                         type="password"
                         name="password"
                         placeholder="Enter password"
+                        className={errors.code === 144 ? 'is-invalid' : ''}
                         value={this.state.password}
                         onChange={this.handleInputChange}
                         required
                       />
+                      {errors.code === 144 && <div className="invalid-feedback">{errors.error}</div>}
                     </FormGroup>
-                    <Button>Login</Button>
+                    {errors && errors.code ? (
+                      <Alert color="danger">
+                        Your not enable to authenticat with those crediantials, please click{' '}
+                        <Link to="/register" className="alert-link">
+                          Register{' '}
+                        </Link>
+                        if you dont have an account.
+                      </Alert>
+                    ) : (
+                      <Fragment />
+                    )}
+                    <Button color="primary">Login</Button>
                   </Form>
                 </CardBody>
               </Card>
@@ -88,4 +111,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = store => ({
+  auth: store.auth,
+  errors: store.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

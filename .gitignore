@@ -80,5 +80,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-!/yarn.lock
-!/package-lock.json
+/yarn.lock
+/package-lock.json
