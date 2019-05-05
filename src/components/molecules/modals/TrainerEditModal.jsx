@@ -8,9 +8,9 @@ class TrainerEditModal extends Component {
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
       isOpen: false,
-      firstName: '',
-      lastName: '',
-      email: ''
+      firstName: null,
+      lastName: null,
+      email: null
     };
   }
 
@@ -37,8 +37,8 @@ class TrainerEditModal extends Component {
   }
 
   render() {
-    const { trainer } = this.props;
     const { isOpen, firstName, lastName, email } = this.state;
+    const { trainer } = this.props;
     return (
       <div>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>

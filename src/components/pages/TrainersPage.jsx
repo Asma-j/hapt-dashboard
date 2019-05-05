@@ -5,8 +5,8 @@ import { getAllTrainers } from '../../api/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
-import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 import TrainerDeleteModal from '../molecules/modals/TrainerDeleteModal';
+import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 
 class TrainersPage extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class TrainersPage extends Component {
   }
 
   render() {
+    const { trainers } = this.state;
     return (
       <Fragment>
         <Header />
@@ -49,14 +50,14 @@ class TrainersPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.trainers ? (
+                  {!trainers ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.trainers.length > 0 ? (
-                    this.state.trainers.map(trainer => (
+                  ) : trainers.length > 0 ? (
+                    trainers.map(trainer => (
                       <tr>
                         <td>{trainer.number.toString().padStart(1, '0')}</td>
                         <td>{trainer.firstName} </td>
