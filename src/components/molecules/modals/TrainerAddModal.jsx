@@ -6,38 +6,50 @@ class TrainerAddModal extends Component {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      firstName: null,
+      lastName: null,
+      email: null
     };
   }
 
   handleOpenClose() {
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      isOpen: !prevState.isOpen,
+      firstName: '',
+      lastName: '',
+      email: ''
     }));
   }
 
   render() {
-    const { isOpen } = this.state;
+    const { isOpen, firstName, lastName, email } = this.state;
     return (
       <div>
         <Button color="success" onClick={this.handleOpenClose} outline>
           <i className="fas fa-plus" /> Add Trainer
         </Button>
-        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+        <Modal isOpen={isOpen} className="bg-success" toggle={this.handleOpenClose}>
           <ModalHeader toggle={this.handleOpenClose}>Add course</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
                 <Label for="firstname">FirstName</Label>
-                <Input type="text" name="firstname" id="firstname" placeholder="Enter the First Name.." />
+                <Input
+                  type="text"
+                  value={firstName}
+                  name="firstname"
+                  id="firstname"
+                  placeholder="Enter the First Name.."
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="lastname">LastName</Label>
-                <Input type="text" name="lastname" id="lastname" placeholder="Enter the Last Name.." />
+                <Input type="text" value={lastName} name="lastname" id="lastname" placeholder="Enter the Last Name.." />
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input type="text" name="email" id="email" placeholder="Enter the Email.." />
+                <Input type="text" value={email} name="email" id="email" placeholder="Enter the Email.." />
               </FormGroup>
             </Form>
           </ModalBody>

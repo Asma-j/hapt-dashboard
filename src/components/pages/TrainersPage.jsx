@@ -1,13 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button } from 'reactstrap';
+import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
 import { getAllTrainers } from '../../api/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
-import TrainerDeleteModal from '../molecules/modals/TrainerAddModal';
-
-TrainerDeleteModal;
+import TrainerDeleteModal from '../molecules/modals/TrainerDeleteModal';
+import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 
 const user = {
   firstName: 'Malek',
@@ -19,7 +18,7 @@ class TrainersPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trainers: null,
+      trainers: [],
       currentUser: null
     };
   }
@@ -32,7 +31,7 @@ class TrainersPage extends Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, trainers } = this.state;
     return (
       <Fragment>
         <Header user={currentUser} />
@@ -59,14 +58,14 @@ class TrainersPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.trainers ? (
+                  {!trainers ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.trainers.length > 0 ? (
-                    this.state.trainers.map(trainer => (
+                  ) : trainers.length > 0 ? (
+                    trainers.map(trainer => (
                       <tr>
                         <td>{trainer.number.toString().padStart(1, '0')}</td>
                         <td>{trainer.firstName} </td>
@@ -74,8 +73,8 @@ class TrainersPage extends Component {
                         <td>{trainer.email}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
-                            <TrainerEditModal />
-                            <TrainerDeleteModal />
+                            <TrainerEditModal trainer={trainer} />
+                            <TrainerDeleteModal trainer={trainer} />
                           </ButtonGroup>
                         </td>
                       </tr>
