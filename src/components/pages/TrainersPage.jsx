@@ -44,10 +44,11 @@ class TrainersPage extends Component {
               <Table bordered striped hover responsive>
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>CIN</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Email</th>
+                    <th>Tel</th>
                     <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
@@ -61,10 +62,11 @@ class TrainersPage extends Component {
                   ) : trainers.length > 0 ? (
                     trainers.map(trainer => (
                       <tr>
-                        <td>{trainer.number.toString().padStart(1, '0')}</td>
+                        <td>{trainer.cin.toString().padStart(8, '0')}</td>
                         <td>{trainer.firstName} </td>
                         <td>{trainer.lastName}</td>
                         <td>{trainer.email}</td>
+                        <td>{trainer.tel}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
                             <TrainerEditModal trainer={trainer} />
@@ -75,7 +77,7 @@ class TrainersPage extends Component {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5" style={{ textAlign: 'center' }}>
+                      <td colSpan="6" style={{ textAlign: 'center' }}>
                         No data found...
                       </td>
                     </tr>

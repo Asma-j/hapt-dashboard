@@ -14,7 +14,9 @@ class TrainerEditModal extends Component {
       isOpen: false,
       firstName: null,
       lastName: null,
-      email: null
+      email: null,
+      tel: null,
+      cin: null
     };
   }
 
@@ -26,13 +28,15 @@ class TrainerEditModal extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const { firstName, lastName, email } = this.state;
+    const { firstName, lastName, email, tel, cin } = this.state;
     const { trainer } = this.props;
     this.props.editTrainer({
       _id: trainer._id,
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
-      email
+      email,
+      tel,
+      cin
     });
     this.props.getAllTrainers();
     this.setState({ isOpen: false });
@@ -44,16 +48,18 @@ class TrainerEditModal extends Component {
       isOpen: !prevState.isOpen,
       firstName: trainer.firstName,
       lastName: trainer.lastName,
-      email: trainer.email
+      email: trainer.email,
+      tel: trainer.tel,
+      cin: trainer.cin
     }));
   }
 
   render() {
-    const { isOpen, firstName, lastName, email } = this.state;
+    const { isOpen, firstName, lastName, email, tel, cin } = this.state;
     return (
       <Fragment>
-        <Button color="warning" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Add trainer
+        <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
+          <FontAwesomeIcon icon="plus" /> Edit
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
@@ -86,11 +92,33 @@ class TrainerEditModal extends Component {
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   placeholder="Enter an email.."
                   value={email}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="tel">Phone</Label>
+                <Input
+                  type="tel"
+                  name="tel"
+                  id="tel"
+                  placeholder="Enter an tel. number.."
+                  value={tel}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="cin">Phone</Label>
+                <Input
+                  type="number"
+                  name="cin"
+                  id="cin"
+                  placeholder="Enter a C.I.N number.."
+                  value={cin}
                   onChange={this.handleChange}
                 />
               </FormGroup>

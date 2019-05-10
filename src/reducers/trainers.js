@@ -1,36 +1,36 @@
 import {
-  FETCH_STUDENTS_REQUEST,
-  FETCH_STUDENTS_SUCCESS,
-  FETCH_STUDENTS_FAILURE,
-  ADD_STUDENT_SUCCESS,
-  ADD_STUDENT_FAILURE,
-  EDIT_STUDENT_SUCCESS,
-  EDIT_STUDENT_FAILURE,
-  DELETE_STUDENT_SUCCESS,
-  DELETE_STUDENT_FAILURE
+  FETCH_TRAINERS_REQUEST,
+  FETCH_TRAINERS_SUCCESS,
+  FETCH_TRAINERS_FAILURE,
+  ADD_TRAINER_SUCCESS,
+  ADD_TRAINER_FAILURE,
+  EDIT_TRAINER_SUCCESS,
+  EDIT_TRAINER_FAILURE,
+  DELETE_TRAINER_SUCCESS,
+  DELETE_TRAINER_FAILURE
 } from '../actions/types';
 
 const initialState = [];
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_STUDENTS_SUCCESS:
+    case FETCH_TRAINERS_SUCCESS:
       return action.payload;
-    case FETCH_STUDENTS_REQUEST:
+    case FETCH_TRAINERS_REQUEST:
       return state;
-    case FETCH_STUDENTS_FAILURE:
+    case FETCH_TRAINERS_FAILURE:
       return state;
-    case ADD_STUDENT_SUCCESS:
+    case ADD_TRAINER_SUCCESS:
       return state;
-    case ADD_STUDENT_FAILURE:
+    case ADD_TRAINER_FAILURE:
       return state;
-    case EDIT_STUDENT_SUCCESS:
+    case EDIT_TRAINER_SUCCESS:
       return state;
-    case EDIT_STUDENT_FAILURE:
+    case EDIT_TRAINER_FAILURE:
       return state;
-    case DELETE_STUDENT_SUCCESS:
+    case DELETE_TRAINER_SUCCESS:
       return state;
-    case DELETE_STUDENT_FAILURE:
+    case DELETE_TRAINER_FAILURE:
       return state;
     default:
       return state;

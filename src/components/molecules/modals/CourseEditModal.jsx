@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -42,8 +43,8 @@ class CourseEditModal extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: course.title,
-      tutor: course.tutor.number,
-      formation: course.formation.number
+      tutor: course.tutor._id,
+      formation: course.formation._id
     }));
   }
 
@@ -78,13 +79,12 @@ class CourseEditModal extends Component {
                   type="select"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
                 >
-                  {trainers.map(trainer => (
-                    <option value={trainer.number}>
-                      {trainer.firstName} {trainer.lastName}
+                  {trainers.map(t => (
+                    <option key={t._id} value={t._id}>
+                      {t.firstName} {t.lastName}
                     </option>
                   ))}
                 </Input>
@@ -94,13 +94,14 @@ class CourseEditModal extends Component {
                 <Input
                   type="select"
                   name="formation"
-                  id="formation"
-                  placeholder="Enter the course title.."
+                  id="title"
                   value={formation}
                   onChange={this.handleChange}
                 >
-                  {formations.map(forma => (
-                    <option value={forma.number}>{forma.title}</option>
+                  {formations.map(f => (
+                    <option key={f._id} value={f._id}>
+                      {f.title}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>

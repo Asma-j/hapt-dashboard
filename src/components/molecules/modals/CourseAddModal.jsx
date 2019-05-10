@@ -1,9 +1,10 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable no-nested-ternary,react/destructuring-assignment */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
+import { addCourse } from '../../../actions/courses';
 import { getAllTrainers } from '../../../actions/trainers';
 import { getAllFormations } from '../../../actions/formations';
 
@@ -47,7 +48,7 @@ class CourseAddModal extends Component {
   handleOnSubmit = async event => {
     const { title, tutor, formation } = this.state;
     event.preventDefault();
-    await this.addCourse({ title, tutor, formation });
+    await this.props.addCourse({ title, tutor, formation });
   };
 
   handleOpenClose() {
@@ -56,7 +57,7 @@ class CourseAddModal extends Component {
       isOpen: !prevState.isOpen,
       title: '',
       tutor: '',
-      formation: formation ? formation.number : formations && formations.length > 0 ? formations[0].number : ''
+      formation: formation ? formation._id : formations && formations.length > 0 ? formations[0]._id : ''
     }));
   }
 
@@ -91,13 +92,12 @@ class CourseAddModal extends Component {
                   type="select"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
                 >
-                  {trainers.map(trainer => (
-                    <option value={trainer.number}>
-                      {trainer.firstName} {trainer.lastName}
+                  {trainers.map(t => (
+                    <option key={t._id} value={t._id}>
+                      {t.firstName} {t.lastName}
                     </option>
                   ))}
                 </Input>
@@ -109,13 +109,12 @@ class CourseAddModal extends Component {
                   name="formation"
                   id="title"
                   disabled={selectedFormation}
-                  placeholder="Enter the course title.."
                   value={formation}
                   onChange={this.handleChange}
                 >
-                  {formations.map(item => (
-                    <option key={item._id} value={item.number}>
-                      {item.title}
+                  {formations.map(f => (
+                    <option key={f._id} value={f._id}>
+                      {f.title}
                     </option>
                   ))}
                 </Input>
@@ -125,7 +124,7 @@ class CourseAddModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="success" onClick={this.handleOpenClose} disabled={!title || !tutor || !formation}>
+              <Button color="success" type="submit" disabled={!title || !tutor || !formation}>
                 <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
@@ -143,5 +142,5 @@ const mapStateToProps = store => ({
 
 export default connect(
   mapStateToProps,
-  { getAllFormations, getAllTrainers }
+  { getAllFormations, getAllTrainers, addCourse }
 )(CourseAddModal);
