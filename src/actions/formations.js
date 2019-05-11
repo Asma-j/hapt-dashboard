@@ -19,7 +19,6 @@ export const getAllFormations = () => dispatch => {
 };
 
 export const addFormation = formation => dispatch => {
-  dispatch({ type: 'ADD_FORMATIONS_REQUEST' });
   axios
     .post(`${remoteAPI}/formations`, formation)
     .then(res => {
