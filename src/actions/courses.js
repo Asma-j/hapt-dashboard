@@ -1,9 +1,10 @@
 import axios from 'axios';
+import remoteAPI from '../utils/config';
 
 export const getAllCourses = () => dispatch => {
   dispatch({ type: 'FETCH_COURSES_REQUEST' });
   axios
-    .get('/courses')
+    .get(`${remoteAPI}/courses`)
     .then(res => {
       dispatch({
         type: 'FETCH_COURSES_SUCCESS',
@@ -18,7 +19,7 @@ export const getAllCourses = () => dispatch => {
 
 export const addCourse = course => dispatch => {
   axios
-    .post('/courses', course)
+    .post(`${remoteAPI}/courses`, course)
     .then(res => {
       dispatch({ type: 'ADD_COURSE_SUCCESS' });
       return res.data;
@@ -31,7 +32,7 @@ export const addCourse = course => dispatch => {
 
 export const editCourse = course => dispatch => {
   axios
-    .put(`/courses/${course._id}`, course)
+    .put(`${remoteAPI}/courses/${course._id}`, course)
     .then(res => {
       dispatch({ type: 'EDIT_COURSE_SUCCESS' });
       return res.data;
@@ -44,7 +45,7 @@ export const editCourse = course => dispatch => {
 
 export const deleteCourse = course => dispatch => {
   axios
-    .delete(`/courses/${course._id}`)
+    .delete(`${remoteAPI}/courses/${course._id}`)
     .then(res => {
       dispatch({ type: 'DELETE_COURSE_SUCCESS' });
       return res.data;

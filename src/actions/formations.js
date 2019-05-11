@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getAllFormations = () => dispatch => {
   dispatch({ type: 'FETCH_FORMATIONS_REQUEST' });
   axios
-    .get('/formations')
+    .get(`${remoteAPI}/formations`)
     .then(res => {
       dispatch({
         type: 'FETCH_FORMATIONS_SUCCESS',
@@ -18,7 +18,7 @@ export const getAllFormations = () => dispatch => {
 
 export const addFormation = formation => dispatch => {
   axios
-    .post('/formations', formation)
+    .post(`${remoteAPI}/formations`, formation)
     .then(res => {
       dispatch({ type: 'ADD_FORMATION_SUCCESS' });
       return res.data;
@@ -31,7 +31,7 @@ export const addFormation = formation => dispatch => {
 
 export const editFormation = formation => dispatch => {
   axios
-    .put(`/formations/${formation._id}`, formation)
+    .put(`${remoteAPI}/formations/${formation._id}`, formation)
     .then(res => {
       dispatch({ type: 'EDIT_FORMATION_SUCCESS' });
       return res.data;
@@ -44,7 +44,7 @@ export const editFormation = formation => dispatch => {
 
 export const deleteFormation = formation => dispatch => {
   axios
-    .delete(`/formations/${formation._id}`)
+    .delete(`${remoteAPI}/formations/${formation._id}`)
     .then(res => {
       dispatch({ type: 'DELETE_FORMATION_SUCCESS' });
       return res.data;

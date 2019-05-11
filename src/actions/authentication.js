@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { GET_ERRORS, SET_CURRENT_USER, SET_CURRENT_USER_DATA } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import remoteAPI from '../utils/config';
 
 export const setCurrentUser = decoded => {
   return {
@@ -12,7 +13,7 @@ export const setCurrentUser = decoded => {
 
 export const registerUser = (user, history) => dispatch => {
   axios
-    .post('/register', user)
+    .post(`${remoteAPI}/register`, user)
     .then(() => history.push('/login'))
     .catch(err => {
       dispatch({
@@ -24,7 +25,7 @@ export const registerUser = (user, history) => dispatch => {
 
 export const loginUser = user => dispatch => {
   axios
-    .post('/signin', user)
+    .post(`${remoteAPI}/signin`, user)
     .then(res => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);

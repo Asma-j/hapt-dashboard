@@ -1,9 +1,10 @@
 import axios from 'axios';
+import remoteAPI from '../utils/config';
 
 export const getAllTrainers = () => dispatch => {
   dispatch({ type: 'FETCH_TRAINERS_REQUEST' });
   axios
-    .get('/trainers')
+    .get(`${remoteAPI}/trainers`)
     .then(res => {
       dispatch({
         type: 'FETCH_TRAINERS_SUCCESS',
@@ -18,7 +19,7 @@ export const getAllTrainers = () => dispatch => {
 
 export const addTrainer = trainer => dispatch => {
   axios
-    .post('/trainers', trainer)
+    .post(`${remoteAPI}/trainers`, trainer)
     .then(res => {
       dispatch({ type: 'ADD_TRAINER_SUCCESS' });
       return res.data;
@@ -31,7 +32,7 @@ export const addTrainer = trainer => dispatch => {
 
 export const editTrainer = trainer => dispatch => {
   axios
-    .put(`/trainers/${trainer._id}`, trainer)
+    .put(`${remoteAPI}/trainers/${trainer._id}`, trainer)
     .then(res => {
       dispatch({ type: 'EDIT_TRAINER_SUCCESS' });
       return res.data;
@@ -44,7 +45,7 @@ export const editTrainer = trainer => dispatch => {
 
 export const deleteTrainer = trainer => dispatch => {
   axios
-    .delete(`/trainers/${trainer._id}`)
+    .delete(`${remoteAPI}/trainers/${trainer._id}`)
     .then(res => {
       dispatch({ type: 'DELETE_TRAINER_SUCCESS' });
       return res.data;
