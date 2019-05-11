@@ -1,8 +1,7 @@
 import { FETCH_FORMATIONS_SUCCESS, ADD_FORMATIONS_SUCCESS } from '../actions/types';
+import initialState from './initialState';
 
-const initialState = [];
-
-export default function(state = initialState, action) {
+export default function(state = initialState.formations, action) {
   switch (action.type) {
     case FETCH_FORMATIONS_SUCCESS:
       return action.payload;

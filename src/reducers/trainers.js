@@ -1,8 +1,7 @@
 import { FETCH_TRAINERS_SUCCESS } from '../actions/types';
+import initialState from './initialState';
 
-const initialState = [];
-
-export default function(state = initialState, action) {
+export default function(state = initialState.trainers, action) {
   switch (action.type) {
     case FETCH_TRAINERS_SUCCESS:
       return action.payload;
