@@ -50,11 +50,11 @@ class CourseAddModal extends Component {
    * @description This method save the new data and prevent the default page refresh.
    * @param event launched on form submitting.
    */
-  handleOnSubmit = async event => {
-    const { title, tutor, formation } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
-    await this.props.addCourse({ title, tutor, formation });
-    await this.props.getAllCourses;
+    const { title, tutor, formation } = this.state;
+    this.props.addCourse({ title, tutor, formation });
+    this.props.getAllCourses();
     this.setState({ isOpen: false });
   };
 
