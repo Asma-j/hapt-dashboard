@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { editCourse } from '../../../actions/courses';
-import { addTrainer, getAllTrainers } from '../../../actions/trainers';
+import { editCourse, getAllCourses } from '../../../actions/courses';
+import { getAllTrainers } from '../../../actions/trainers';
 import { getAllFormations } from '../../../actions/formations';
 
 class CourseEditModal extends Component {
@@ -18,6 +18,11 @@ class CourseEditModal extends Component {
       tutor: null,
       formation: null
     };
+  }
+
+  componentWillMount() {
+    this.props.getAllFormations();
+    this.props.getAllTrainers();
   }
 
   handleChangeTitle = event => {
@@ -36,6 +41,8 @@ class CourseEditModal extends Component {
     const { title, tutor, formation } = this.state;
     event.preventDefault();
     await this.props.editCourse({ title, tutor, formation });
+    await this.props.getAllCourses;
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
@@ -116,6 +123,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = {
   editCourse,
+  getAllCourses,
   getAllFormations,
   getAllTrainers
 };

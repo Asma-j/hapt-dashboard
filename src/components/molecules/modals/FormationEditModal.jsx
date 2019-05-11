@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { deleteFormation, editFormation, getAllFormations } from '../../../actions/formations';
+import { editFormation, getAllFormations } from '../../../actions/formations';
+import { getAllTrainers } from '../../../actions/trainers';
 
 class FormationEditModal extends Component {
   constructor(props) {
@@ -14,6 +15,10 @@ class FormationEditModal extends Component {
       isOpen: false,
       title: null
     };
+  }
+
+  componentWillMount() {
+    this.props.getAllTrainers();
   }
 
   handleChangeTitle = event => {
@@ -80,12 +85,14 @@ class FormationEditModal extends Component {
 }
 
 const mapStateToProps = store => ({
-  formations: store.formations
+  formations: store.formations,
+  trainers: store.trainers
 });
 
 const mapDispatchToProps = {
   editFormation,
-  getAllFormations
+  getAllFormations,
+  getAllTrainers
 };
 
 export default connect(

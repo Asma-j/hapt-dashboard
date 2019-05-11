@@ -3,7 +3,7 @@ import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { addStudent, deleteStudent, getAllStudents } from '../../../actions/students';
+import { deleteStudent, getAllStudents } from '../../../actions/students';
 
 class StudentDeleteModal extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class StudentDeleteModal extends Component {
 
   handleOnSubmit = async () => {
     await this.props.deleteStudent(this.props.student);
-    this.props.getAllStudents();
+    await this.props.getAllStudents();
     this.setState({ isOpen: false });
   };
 

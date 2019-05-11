@@ -20,6 +20,11 @@ class CourseAddModal extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getAllFormations();
+    this.props.getAllTrainers();
+  }
+
   /**
    * @description This method makes it straightforward to modify or validate specific user input,
    * example we tried to capitalize the first character of the name.
@@ -49,6 +54,8 @@ class CourseAddModal extends Component {
     const { title, tutor, formation } = this.state;
     event.preventDefault();
     await this.props.addCourse({ title, tutor, formation });
+    await this.props.getAllCourses;
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
