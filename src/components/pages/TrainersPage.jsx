@@ -1,7 +1,8 @@
 /* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
-import { getAllTrainers } from '../../api/trainers';
+import { getAllTrainers } from '../../actions/trainers';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import TrainerAddModal from '../molecules/modals/TrainerAddModal';
@@ -16,9 +17,10 @@ class TrainersPage extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
+    await this.props.getAllTrainers();
     this.setState({
-      trainers: getAllTrainers()
+      trainers: this.props.trainers
     });
   }
 
@@ -42,10 +44,11 @@ class TrainersPage extends Component {
               <Table bordered striped hover responsive>
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>CIN</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Email</th>
+                    <th>Tel</th>
                     <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
@@ -59,10 +62,11 @@ class TrainersPage extends Component {
                   ) : trainers.length > 0 ? (
                     trainers.map(trainer => (
                       <tr>
-                        <td>{trainer.number.toString().padStart(1, '0')}</td>
+                        <td>{trainer.cin.toString().padStart(8, '0')}</td>
                         <td>{trainer.firstName} </td>
                         <td>{trainer.lastName}</td>
                         <td>{trainer.email}</td>
+                        <td>{trainer.tel}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
                             <TrainerEditModal trainer={trainer} />
@@ -73,7 +77,7 @@ class TrainersPage extends Component {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5" style={{ textAlign: 'center' }}>
+                      <td colSpan="6" style={{ textAlign: 'center' }}>
                         No data found...
                       </td>
                     </tr>
@@ -89,4 +93,11 @@ class TrainersPage extends Component {
   }
 }
 
-export default TrainersPage;
+const mapStateToProps = store => ({
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllTrainers }
+)(TrainersPage);

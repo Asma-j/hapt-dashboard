@@ -1,8 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { getAllTrainers } from '../../../api/trainers';
+import { editFormation, getAllFormations } from '../../../actions/formations';
 
 class FormationEditModal extends Component {
   constructor(props) {
@@ -10,10 +12,7 @@ class FormationEditModal extends Component {
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
       isOpen: false,
-      title: null,
-      tutor: null,
-      course: null,
-      trainers: []
+      title: null
     };
   }
 
@@ -23,42 +22,35 @@ class FormationEditModal extends Component {
     });
   };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
   handleOnSubmit = async event => {
-    const { title, tutor, course } = this.state;
+    const { title } = this.state;
     event.preventDefault();
-    await this.editFormation({ title, tutor, course });
+    this.props.editFormation({ _id: this.props.formation._id, title: capitaliseString(title) });
+    this.props.getAllFormations();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
     const { formation } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      title: formation.title,
-      tutor: formation.tutor.number,
-      course: formation.course,
-      trainers: getAllTrainers()
+      title: formation.title
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, trainers } = this.state;
+    const { isOpen, title } = this.state;
     const { formation } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
           <FontAwesomeIcon icon="edit" /> Edit
         </Button>
-        <Form onSubmit={this.handleOnSubmit}>
-          <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-            <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-              <b>Edit formation:</b> {formation.title}
-            </ModalHeader>
+        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+          <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
+            <b>Edit formation:</b> {formation.title}
+          </ModalHeader>
+          <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
               <FormGroup>
                 <Label for="title">Title</Label>
@@ -71,30 +63,27 @@ class FormationEditModal extends Component {
                   onChange={this.handleChangeTitle}
                 />
               </FormGroup>
-              <FormGroup>
-                <Label for="trainer">Tutor</Label>
-                <Input type="select" name="tutor" id="number" value={tutor} onChange={this.handleChange}>
-                  {trainers.map(trainer => (
-                    <option value={trainer.number}>
-                      {trainer.firstName} {trainer.lastName}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="warning" onClick={this.handleOpenClose}>
+              <Button type="submit" color="warning" disabled={!title}>
                 <FontAwesomeIcon icon="edit" /> Edit
               </Button>
             </ModalFooter>
-          </Modal>
-        </Form>
+          </Form>
+        </Modal>
       </Fragment>
     );
   }
 }
 
-export default FormationEditModal;
+const mapStateToProps = store => ({
+  formations: store.formations
+});
+
+export default connect(
+  mapStateToProps,
+  { editFormation, getAllFormations }
+)(FormationEditModal);

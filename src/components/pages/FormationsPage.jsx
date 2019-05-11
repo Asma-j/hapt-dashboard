@@ -1,8 +1,8 @@
-/* eslint-disable no-nested-ternary */
-
+/* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
-import { Container, Table, Card, CardBody, Button, ButtonGroup } from 'reactstrap';
-import { getAllFormations } from '../../api/formations';
+import { connect } from 'react-redux';
+import { Container, Table, Card, CardBody, ButtonGroup } from 'reactstrap';
+import { getAllFormations } from '../../actions/formations';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import FormationAddModal from '../molecules/modals/FormationAddModal';
@@ -18,9 +18,10 @@ class FormationsPage extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
+    await this.props.getAllFormations();
     this.setState({
-      formations: getAllFormations()
+      formations: this.props.formations
     });
   }
 
@@ -46,7 +47,6 @@ class FormationsPage extends Component {
                   <tr>
                     <th>#</th>
                     <th>Title</th>
-                    <th>Tutor</th>
                     <th>Cours</th>
                     <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
@@ -60,10 +60,9 @@ class FormationsPage extends Component {
                     </tr>
                   ) : formations.length > 0 ? (
                     formations.map(formation => (
-                      <tr>
+                      <tr key={formation._id}>
                         <td>{formation.number.toString().padStart(4, '0')}</td>
                         <td>{formation.title}</td>
-                        <td>{`${formation.tutor.firstName} ${formation.tutor.lastName}`}</td>
                         <td>
                           {formation.course && formation.course.length > 1
                             ? formation.course.map(cour => `${cour.title}, `)
@@ -96,4 +95,11 @@ class FormationsPage extends Component {
   }
 }
 
-export default FormationsPage;
+const mapStateToProps = store => ({
+  formations: store.formations
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllFormations }
+)(FormationsPage);

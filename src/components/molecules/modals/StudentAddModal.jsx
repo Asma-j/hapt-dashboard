@@ -1,61 +1,117 @@
-import React, { Component } from 'react';
+/* eslint-disable react/destructuring-assignment */
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { capitaliseString } from '../../../utils/tools';
+import { addStudent, getAllStudents } from '../../../actions/students';
 
 class StudentAddModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      firstName: null,
+      lastName: null,
+      email: null
     };
   }
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const { firstName, lastName, email } = this.state;
+    this.props.addStudent({
+      firstName: capitaliseString(firstName),
+      lastName: capitaliseString(lastName),
+      email
+    });
+    this.props.getAllStudents();
+    this.setState({ isOpen: false });
+  };
+
   handleOpenClose() {
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      isOpen: !prevState.isOpen,
+      firstName: '',
+      lastName: '',
+      email: ''
     }));
   }
 
   render() {
-    const { isOpen } = this.state;
+    const { isOpen, firstName, lastName, email } = this.state;
     return (
-      <div>
+      <Fragment>
         <Button color="success" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Add Student
+          <FontAwesomeIcon icon="plus" /> Add student
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
             <b>Add student</b>
           </ModalHeader>
-          <ModalBody>
-            <Form>
+          <Form onSubmit={this.handleOnSubmit}>
+            <ModalBody>
               <FormGroup>
-                <Label for="firstname">FirstName</Label>
-                <Input type="text" name="firstname" id="firstname" placeholder="Enter the First Name.." />
+                <Label for="firstName">Firstname</Label>
+                <Input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="Enter the Firstname.."
+                  value={firstName}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
               <FormGroup>
-                <Label for="lastname">LastName</Label>
-                <Input type="text" name="lastname" id="lastname" placeholder="Enter the Last Name.." />
+                <Label for="lastname">Lastname</Label>
+                <Input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Enter the Lastname.."
+                  value={lastName}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input type="text" name="email" id="email" placeholder="Enter the Email.." />
+                <Input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Enter an email.."
+                  value={email}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={this.handleOpenClose}>
-              Cancel
-            </Button>
-            <Button color="success" onClick={this.handleOpenClose}>
-              Add
-            </Button>
-          </ModalFooter>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.handleOpenClose}>
+                Cancel
+              </Button>
+              <Button type="submit" color="success" disabled={!firstName || !lastName || !email}>
+                Add
+              </Button>
+            </ModalFooter>
+          </Form>
         </Modal>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default StudentAddModal;
+const mapStateToProps = store => ({
+  students: store.students
+});
+
+export default connect(
+  mapStateToProps,
+  { addStudent, getAllStudents }
+)(StudentAddModal);

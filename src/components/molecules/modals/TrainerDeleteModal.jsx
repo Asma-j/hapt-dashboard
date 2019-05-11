@@ -1,20 +1,24 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { deleteTrainer, getAllTrainers } from '../../../actions/trainers';
 
 class TrainerDeleteModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.state = {
       isOpen: false
     };
   }
 
-  handleOnSubmit = async event => {
-    const { trainer } = this.props;
-    event.preventDefault();
-    await this.deleteTrainer(trainer);
+  handleOnSubmit = async () => {
+    await this.props.deleteTrainer(this.props.trainer);
+    this.props.getAllTrainers();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
@@ -40,7 +44,7 @@ class TrainerDeleteModal extends Component {
             <Button color="secondary" onClick={this.handleOpenClose}>
               Cancel
             </Button>
-            <Button color="danger" onClick={this.handleOpenClose}>
+            <Button color="danger" onClick={this.handleOnSubmit}>
               <FontAwesomeIcon icon="trash" /> Delete
             </Button>
           </ModalFooter>
@@ -50,4 +54,11 @@ class TrainerDeleteModal extends Component {
   }
 }
 
-export default TrainerDeleteModal;
+const mapStateToProps = store => ({
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { deleteTrainer, getAllTrainers }
+)(TrainerDeleteModal);

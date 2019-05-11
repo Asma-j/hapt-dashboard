@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { editTrainer, getAllTrainers } from '../../../actions/trainers';
+import { editStudent, getAllStudents } from '../../../actions/students';
 
-class TrainerEditModal extends Component {
+class StudentEditModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
@@ -14,9 +14,7 @@ class TrainerEditModal extends Component {
       isOpen: false,
       firstName: null,
       lastName: null,
-      email: null,
-      tel: null,
-      cin: null
+      email: null
     };
   }
 
@@ -28,42 +26,38 @@ class TrainerEditModal extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const { firstName, lastName, email, tel, cin } = this.state;
-    const { trainer } = this.props;
-    this.props.editTrainer({
-      _id: trainer._id,
+    const { firstName, lastName, email } = this.state;
+    const { student } = this.props;
+    this.props.editStudent({
+      _id: student._id,
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
-      email,
-      tel,
-      cin
+      email
     });
-    this.props.getAllTrainers();
+    this.props.getAllStudents();
     this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
-    const { trainer } = this.props;
+    const { student } = this.props;
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      firstName: trainer.firstName,
-      lastName: trainer.lastName,
-      email: trainer.email,
-      tel: trainer.tel,
-      cin: trainer.cin
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email
     }));
   }
 
   render() {
-    const { isOpen, firstName, lastName, email, tel, cin } = this.state;
+    const { isOpen, firstName, lastName, email } = this.state;
     return (
       <Fragment>
-        <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Edit
+        <Button color="warning" onClick={this.handleOpenClose} outline>
+          <FontAwesomeIcon icon="plus" /> Add student
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-            <b>Add trainer</b>
+            <b>Add student</b>
           </ModalHeader>
           <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
@@ -92,33 +86,11 @@ class TrainerEditModal extends Component {
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input
-                  type="email"
+                  type="text"
                   name="email"
                   id="email"
                   placeholder="Enter an email.."
                   value={email}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="tel">Phone</Label>
-                <Input
-                  type="tel"
-                  name="tel"
-                  id="tel"
-                  placeholder="Enter an tel. number.."
-                  value={tel}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="cin">Phone</Label>
-                <Input
-                  type="number"
-                  name="cin"
-                  id="cin"
-                  placeholder="Enter a C.I.N number.."
-                  value={cin}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -139,10 +111,10 @@ class TrainerEditModal extends Component {
 }
 
 const mapStateToProps = store => ({
-  trainers: store.trainers
+  students: store.students
 });
 
 export default connect(
   mapStateToProps,
-  { editTrainer, getAllTrainers }
-)(TrainerEditModal);
+  { editStudent, getAllStudents }
+)(StudentEditModal);

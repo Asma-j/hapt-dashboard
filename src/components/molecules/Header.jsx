@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -29,7 +30,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated, user } = this.props.authentication;
     const { isOpen } = this.state;
     return (
       <Navbar color="light" light expand="md" className="shadow-1">
@@ -81,7 +82,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  authentication: state.authentication
 });
 
 export default connect(

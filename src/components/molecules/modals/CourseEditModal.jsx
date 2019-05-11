@@ -1,10 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { capitaliseString } from '../../../utils/tools';
-import { getAllTrainers } from '../../../api/trainers';
-import { getAllFormations } from '../../../api/formations';
+import { editCourse } from '../../../actions/courses';
+import { getAllTrainers } from '../../../actions/trainers';
+import { getAllFormations } from '../../../actions/formations';
 
 class CourseEditModal extends Component {
   constructor(props) {
@@ -14,9 +16,7 @@ class CourseEditModal extends Component {
       isOpen: false,
       title: null,
       tutor: null,
-      formation: null,
-      formations: [],
-      trainers: []
+      formation: null
     };
   }
 
@@ -35,7 +35,7 @@ class CourseEditModal extends Component {
   handleOnSubmit = async event => {
     const { title, tutor, formation } = this.state;
     event.preventDefault();
-    await this.editCourse({ title, tutor, formation });
+    await this.props.editCourse({ title, tutor, formation });
   };
 
   handleOpenClose() {
@@ -43,16 +43,14 @@ class CourseEditModal extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       title: course.title,
-      tutor: course.tutor.number,
-      formation: course.formation.number,
-      trainers: getAllTrainers(),
-      formations: getAllFormations()
+      tutor: course.tutor._id,
+      formation: course.formation._id
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, formation, trainers, formations } = this.state;
-    const { course } = this.props;
+    const { isOpen, title, tutor, formation } = this.state;
+    const { course, trainers, formations } = this.props;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -81,13 +79,12 @@ class CourseEditModal extends Component {
                   type="select"
                   name="tutor"
                   id="tutor"
-                  placeholder="Enter the course's tutor.."
                   value={tutor}
                   onChange={this.handleChange}
                 >
-                  {trainers.map(trainer => (
-                    <option value={trainer.number}>
-                      {trainer.firstName} {trainer.lastName}
+                  {trainers.map(t => (
+                    <option key={t._id} value={t._id}>
+                      {t.firstName} {t.lastName}
                     </option>
                   ))}
                 </Input>
@@ -97,13 +94,14 @@ class CourseEditModal extends Component {
                 <Input
                   type="select"
                   name="formation"
-                  id="formation"
-                  placeholder="Enter the course title.."
+                  id="title"
                   value={formation}
                   onChange={this.handleChange}
                 >
-                  {formations.map(forma => (
-                    <option value={forma.number}>{forma.title}</option>
+                  {formations.map(f => (
+                    <option key={f._id} value={f._id}>
+                      {f.title}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
@@ -112,7 +110,7 @@ class CourseEditModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="warning" onClick={this.handleOpenClose}>
+              <Button type="submit" color="warning" disabled={!title || !tutor || !formation}>
                 <FontAwesomeIcon icon="edit" /> Edit
               </Button>
             </ModalFooter>
@@ -123,4 +121,12 @@ class CourseEditModal extends Component {
   }
 }
 
-export default CourseEditModal;
+const mapStateToProps = store => ({
+  formations: store.formations,
+  trainers: store.trainers
+});
+
+export default connect(
+  mapStateToProps,
+  { editCourse, getAllFormations, getAllTrainers }
+)(CourseEditModal);

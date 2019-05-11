@@ -1,11 +1,13 @@
 /* eslint-disable react/destructuring-assignment, no-nested-ternary */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Table, Card, CardBody } from 'reactstrap';
-import { getAllStudents } from '../../api/students';
+import { getAllStudents } from '../../actions/students';
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
 import StudentDeleteModal from '../molecules/modals/StudentDeleteModal';
+import StudentEditModal from '../molecules/modals/StudentEditModal';
 
 class StudentsPage extends Component {
   constructor(props) {
@@ -15,13 +17,15 @@ class StudentsPage extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
+    await this.props.getAllStudents();
     this.setState({
-      students: getAllStudents()
+      students: this.props.students
     });
   }
 
   render() {
+    const { students } = this.state;
     return (
       <Fragment>
         <Header />
@@ -48,20 +52,21 @@ class StudentsPage extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {!this.state.students ? (
+                  {!students ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center' }}>
                         Loading...
                       </td>
                     </tr>
-                  ) : this.state.students.length > 0 ? (
-                    this.state.students.map(student => (
+                  ) : students.length > 0 ? (
+                    students.map(student => (
                       <tr>
                         <td>{student.number.toString().padStart(1, '0')}</td>
                         <td>{student.firstName} </td>
                         <td>{student.lastName}</td>
                         <td>{student.email}</td>
                         <td style={{ textAlign: 'right' }}>
+                          <StudentEditModal student={student} />
                           <StudentDeleteModal student={student} />
                         </td>
                       </tr>
@@ -84,4 +89,11 @@ class StudentsPage extends Component {
   }
 }
 
-export default StudentsPage;
+const mapStateToProps = store => ({
+  students: store.students
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllStudents }
+)(StudentsPage);

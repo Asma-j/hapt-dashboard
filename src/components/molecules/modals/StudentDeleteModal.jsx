@@ -1,20 +1,24 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { deleteStudent, getAllStudents } from '../../../actions/students';
 
 class StudentDeleteModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.state = {
       isOpen: false
     };
   }
 
-  handleOnSubmit = async event => {
-    const { student } = this.props;
-    event.preventDefault();
-    await this.deleteStudent(student);
+  handleOnSubmit = async () => {
+    await this.props.deleteStudent(this.props.student);
+    this.props.getAllStudents();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
@@ -40,7 +44,7 @@ class StudentDeleteModal extends Component {
             <Button color="secondary" onClick={this.handleOpenClose}>
               Cancel
             </Button>
-            <Button color="danger" onClick={this.handleOpenClose}>
+            <Button color="danger" onClick={this.handleOnSubmit}>
               <FontAwesomeIcon icon="trash" /> Delete
             </Button>
           </ModalFooter>
@@ -50,4 +54,11 @@ class StudentDeleteModal extends Component {
   }
 }
 
-export default StudentDeleteModal;
+const mapStateToProps = store => ({
+  students: store.students
+});
+
+export default connect(
+  mapStateToProps,
+  { deleteStudent, getAllStudents }
+)(StudentDeleteModal);

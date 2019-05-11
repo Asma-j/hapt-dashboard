@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+/* eslint-disable react/destructuring-assignment */
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getAllTrainers } from '../../../api/trainers';
+import { addFormation, getAllFormations } from '../../../actions/formations';
 import { capitaliseString } from '../../../utils/tools';
 
 class FormationAddModal extends Component {
@@ -10,9 +12,7 @@ class FormationAddModal extends Component {
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
       isOpen: false,
-      title: null,
-      tutor: null,
-      trainers: []
+      title: null
     };
   }
 
@@ -28,46 +28,36 @@ class FormationAddModal extends Component {
   };
 
   /**
-   * @description This method makes it straightforward to modify any user input.
-   * @param event launched on form changing.
-   */
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
-  /**
    * @description This method save the new data and prevent the default page refresh.
    * @param event launched on form submitting.
    */
-  handleOnSubmit = async event => {
-    const { title, tutor } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
-    await this.addFormation({ title, tutor });
+    const { title } = this.state;
+    this.props.addFormation({ title: capitaliseString(title) });
+    this.props.getAllFormations();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      title: '',
-      tutor: '',
-      trainers: getAllTrainers()
+      title: ''
     }));
   }
 
   render() {
-    const { isOpen, title, tutor, trainers } = this.state;
+    const { isOpen, title } = this.state;
     return (
-      <div>
+      <Fragment>
         <Button color="success" onClick={this.handleOpenClose} outline>
           <FontAwesomeIcon icon="plus" /> Add formation
         </Button>
-        <Form onSubmit={this.handleOnSubmit}>
-          <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
-            <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
-              <b>Add formation</b>
-            </ModalHeader>
+        <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
+          <ModalHeader className="bg-success" toggle={this.handleOpenClose}>
+            <b>Add formation</b>
+          </ModalHeader>
+          <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
               <FormGroup>
                 <Label for="title">Title</Label>
@@ -80,30 +70,27 @@ class FormationAddModal extends Component {
                   onChange={this.handleChangeTitle}
                 />
               </FormGroup>
-              <FormGroup>
-                <Label for="tutor">Tutor</Label>
-                <Input type="select" name="tutor" id="tutor" value={tutor} onChange={this.handleChange}>
-                  {trainers.map(trainer => (
-                    <option value={trainer.number}>
-                      {trainer.firstName} {trainer.lastName}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button color="success" onClick={this.handleOpenClose}>
+              <Button type="submit" color="success" disabled={!title}>
                 <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
-          </Modal>
-        </Form>
-      </div>
+          </Form>
+        </Modal>
+      </Fragment>
     );
   }
 }
 
-export default FormationAddModal;
+const mapStateToProps = store => ({
+  formations: store.formations
+});
+
+export default connect(
+  mapStateToProps,
+  { addFormation, getAllFormations }
+)(FormationAddModal);
