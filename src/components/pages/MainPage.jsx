@@ -31,46 +31,46 @@ class Main extends Component {
         <Header />
         <Container style={{ padding: '2vh' }}>
           <Row>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Student} title="Students" link="/students" />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Trainer} title="Trainers" link="/trainers" />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Classrooms} title="Classrooms" link="/classrooms" disabled />
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Course} title="Courses" link="/courses" />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Session} title="Sessions" link="/sessions" disabled />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Calendar} title="Calendars" link="/calendars" disabled />
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Session} title="Formations" link="/formations" />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Test} title="Tests" link="/tests" disabled />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Certificate} title="Certificates" link="/certificates" disabled />
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Inscription} title="Inscriptions" link="/inscriptions" disabled />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Payment} title="Payments" link="/payments" disabled />
             </Col>
-            <Col>
+            <Col md="4" xs="12">
               <SectionCard image={Settings} title="Settings" link="/settings" disabled />
             </Col>
           </Row>
