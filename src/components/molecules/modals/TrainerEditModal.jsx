@@ -113,7 +113,7 @@ class TrainerEditModal extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="cin">Phone</Label>
+                <Label for="cin">C.I.N</Label>
                 <Input
                   type="number"
                   name="cin"
