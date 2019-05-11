@@ -8,25 +8,14 @@ import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
 import StudentDeleteModal from '../molecules/modals/StudentDeleteModal';
 import StudentEditModal from '../molecules/modals/StudentEditModal';
-import { registerUser } from '../../actions/authentication';
 
 class StudentsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      students: null
-    };
-  }
-
-  async componentDidMount() {
-    await this.props.getAllStudents();
-    this.setState({
-      students: this.props.students
-    });
+  componentDidMount() {
+    this.props.getAllStudents();
   }
 
   render() {
-    const { students } = this.state;
+    const { students } = this.props;
     return (
       <Fragment>
         <Header />

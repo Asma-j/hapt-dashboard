@@ -10,22 +10,12 @@ import TrainerDeleteModal from '../molecules/modals/TrainerDeleteModal';
 import TrainerEditModal from '../molecules/modals/TrainerEditModal';
 
 class TrainersPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      trainers: null
-    };
-  }
-
-  async componentDidMount() {
-    await this.props.getAllTrainers();
-    this.setState({
-      trainers: this.props.trainers
-    });
+  componentDidMount() {
+    this.props.getAllTrainers();
   }
 
   render() {
-    const { trainers } = this.state;
+    const { trainers } = this.props;
     return (
       <Fragment>
         <Header />

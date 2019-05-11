@@ -8,25 +8,14 @@ import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
 import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
 import { getAllCourses } from '../../actions/courses';
-import { loginUser } from '../../actions/authentication';
 
 class CoursesPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      courses: null
-    };
-  }
-
-  async componentDidMount() {
-    await this.props.getAllCourses();
-    this.setState({
-      courses: this.props.courses
-    });
+  componentDidMount() {
+    this.props.getAllCourses();
   }
 
   render() {
-    const { courses } = this.state;
+    const { courses } = this.props;
     return (
       <Fragment>
         <Header />
