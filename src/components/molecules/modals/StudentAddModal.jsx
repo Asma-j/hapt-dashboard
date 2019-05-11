@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { addStudent, getAllStudents } from '../../../actions/students';
+import { logoutUser } from '../../../actions/authentication';
 
 class StudentAddModal extends Component {
   constructor(props) {
@@ -111,7 +112,12 @@ const mapStateToProps = store => ({
   students: store.students
 });
 
+const mapDispatchToProps = {
+  addStudent,
+  getAllStudents
+};
+
 export default connect(
   mapStateToProps,
-  { addStudent, getAllStudents }
+  mapDispatchToProps
 )(StudentAddModal);

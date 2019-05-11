@@ -58,7 +58,12 @@ const mapStateToProps = store => ({
   courses: store.courses
 });
 
+const mapDispatchToProps = {
+  deleteCourse,
+  getAllCourses
+};
+
 export default connect(
   mapStateToProps,
-  { deleteCourse, getAllCourses }
+  mapDispatchToProps
 )(CourseDeleteModal);

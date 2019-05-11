@@ -3,7 +3,7 @@ import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { deleteStudent, getAllStudents } from '../../../actions/students';
+import { addStudent, deleteStudent, getAllStudents } from '../../../actions/students';
 
 class StudentDeleteModal extends Component {
   constructor(props) {
@@ -58,7 +58,12 @@ const mapStateToProps = store => ({
   students: store.students
 });
 
+const mapDispatchToProps = {
+  deleteStudent,
+  getAllStudents
+};
+
 export default connect(
   mapStateToProps,
-  { deleteStudent, getAllStudents }
+  mapDispatchToProps
 )(StudentDeleteModal);

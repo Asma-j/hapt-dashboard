@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { addFormation, getAllFormations } from '../../../actions/formations';
 import { capitaliseString } from '../../../utils/tools';
+import { editTrainer, getAllTrainers } from '../../../actions/trainers';
 
 class FormationAddModal extends Component {
   constructor(props) {
@@ -90,7 +91,12 @@ const mapStateToProps = store => ({
   formations: store.formations
 });
 
+const mapDispatchToProps = {
+  addFormation,
+  getAllFormations
+};
+
 export default connect(
   mapStateToProps,
-  { addFormation, getAllFormations }
+  mapDispatchToProps
 )(FormationAddModal);

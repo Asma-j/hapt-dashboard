@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../../actions/authentication';
 import BrandLogo from '../atoms/BrandLogo';
 import UserDefaultAvatar from '../../assets/images/user-13.svg';
+import { getAllStudents } from '../../actions/students';
 
 class Header extends Component {
   constructor(props) {
@@ -85,7 +86,11 @@ const mapStateToProps = state => ({
   authentication: state.authentication
 });
 
+const mapDispatchToProps = {
+  logoutUser
+};
+
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  mapDispatchToProps
 )(withRouter(Header));

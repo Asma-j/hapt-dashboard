@@ -88,13 +88,7 @@ class CourseAddModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
-                <Input
-                  type="select"
-                  name="tutor"
-                  id="tutor"
-                  value={tutor}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="tutor" id="tutor" value={tutor} onChange={this.handleChange}>
                   {trainers.map(t => (
                     <option key={t._id} value={t._id}>
                       {t.firstName} {t.lastName}
@@ -140,7 +134,13 @@ const mapStateToProps = store => ({
   trainers: store.trainers
 });
 
+const mapDispatchToProps = {
+  getAllFormations,
+  getAllTrainers,
+  addCourse
+};
+
 export default connect(
   mapStateToProps,
-  { getAllFormations, getAllTrainers, addCourse }
+  mapDispatchToProps
 )(CourseAddModal);

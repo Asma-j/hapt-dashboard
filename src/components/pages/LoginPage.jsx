@@ -5,6 +5,7 @@ import { Container, Row, Col, Alert, Card, CardBody, Button, Form, FormGroup, La
 import Header from '../molecules/Header';
 import Footer from '../molecules/Footer';
 import { loginUser } from '../../actions/authentication';
+import { getAllTrainers } from '../../actions/trainers';
 
 class Login extends Component {
   constructor() {
@@ -116,7 +117,11 @@ const mapStateToProps = store => ({
   errors: store.errors
 });
 
+const mapDispatchToProps = {
+  loginUser
+};
+
 export default connect(
   mapStateToProps,
-  { loginUser }
+  mapDispatchToProps
 )(Login);

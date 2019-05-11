@@ -5,7 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { editCourse } from '../../../actions/courses';
-import { getAllTrainers } from '../../../actions/trainers';
+import { addTrainer, getAllTrainers } from '../../../actions/trainers';
 import { getAllFormations } from '../../../actions/formations';
 
 class CourseEditModal extends Component {
@@ -75,13 +75,7 @@ class CourseEditModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="tutor">Tutor</Label>
-                <Input
-                  type="select"
-                  name="tutor"
-                  id="tutor"
-                  value={tutor}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="tutor" id="tutor" value={tutor} onChange={this.handleChange}>
                   {trainers.map(t => (
                     <option key={t._id} value={t._id}>
                       {t.firstName} {t.lastName}
@@ -91,13 +85,7 @@ class CourseEditModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="formation">Formation</Label>
-                <Input
-                  type="select"
-                  name="formation"
-                  id="title"
-                  value={formation}
-                  onChange={this.handleChange}
-                >
+                <Input type="select" name="formation" id="title" value={formation} onChange={this.handleChange}>
                   {formations.map(f => (
                     <option key={f._id} value={f._id}>
                       {f.title}
@@ -126,7 +114,13 @@ const mapStateToProps = store => ({
   trainers: store.trainers
 });
 
+const mapDispatchToProps = {
+  editCourse,
+  getAllFormations,
+  getAllTrainers
+};
+
 export default connect(
   mapStateToProps,
-  { editCourse, getAllFormations, getAllTrainers }
+  mapDispatchToProps
 )(CourseEditModal);

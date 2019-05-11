@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../molecules/Header';
 import { registerUser } from '../../actions/authentication';
+import { getAllFormations } from '../../actions/formations';
 
 class Register extends Component {
   constructor() {
@@ -139,7 +140,11 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
+const mapDispatchToProps = {
+  registerUser
+};
+
 export default connect(
   mapStateToProps,
-  { registerUser }
+  mapDispatchToProps
 )(withRouter(Register));

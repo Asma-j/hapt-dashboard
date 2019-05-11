@@ -97,7 +97,11 @@ const mapStateToProps = store => ({
   trainers: store.trainers
 });
 
+const mapDispatchToProps = {
+  getAllTrainers
+};
+
 export default connect(
   mapStateToProps,
-  { getAllTrainers }
+  mapDispatchToProps
 )(TrainersPage);

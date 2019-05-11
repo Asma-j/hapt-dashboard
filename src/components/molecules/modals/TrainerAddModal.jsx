@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { addTrainer, getAllTrainers } from '../../../actions/trainers';
+import { addFormation, getAllFormations } from '../../../actions/formations';
 
 class TrainerAddModal extends Component {
   constructor(props) {
@@ -139,7 +140,12 @@ const mapStateToProps = store => ({
   trainers: store.trainers
 });
 
+const mapDispatchToProps = {
+  addTrainer,
+  getAllTrainers
+};
+
 export default connect(
   mapStateToProps,
-  { addTrainer, getAllTrainers }
+  mapDispatchToProps
 )(TrainerAddModal);

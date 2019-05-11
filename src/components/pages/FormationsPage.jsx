@@ -9,6 +9,7 @@ import FormationAddModal from '../molecules/modals/FormationAddModal';
 import FormationEditModal from '../molecules/modals/FormationEditModal';
 import FormationDeleteModal from '../molecules/modals/FormationDeleteModal';
 import CourseAddModal from '../molecules/modals/CourseAddModal';
+import { getAllCourses } from '../../actions/courses';
 
 class FormationsPage extends Component {
   constructor(props) {
@@ -18,8 +19,11 @@ class FormationsPage extends Component {
     };
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     await this.props.getAllFormations();
+  }
+
+  componentDidMount() {
     this.setState({
       formations: this.props.formations
     });
@@ -99,7 +103,11 @@ const mapStateToProps = store => ({
   formations: store.formations
 });
 
+const mapDispatchToProps = {
+  getAllFormations
+};
+
 export default connect(
   mapStateToProps,
-  { getAllFormations }
+  mapDispatchToProps
 )(FormationsPage);

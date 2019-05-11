@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteTrainer, getAllTrainers } from '../../../actions/trainers';
+import { addCourse } from '../../../actions/courses';
+import { getAllFormations } from '../../../actions/formations';
 
 class TrainerDeleteModal extends Component {
   constructor(props) {
@@ -58,7 +60,12 @@ const mapStateToProps = store => ({
   trainers: store.trainers
 });
 
+const mapDispatchToProps = {
+  deleteTrainer,
+  getAllTrainers
+};
+
 export default connect(
   mapStateToProps,
-  { deleteTrainer, getAllTrainers }
+  mapDispatchToProps
 )(TrainerDeleteModal);

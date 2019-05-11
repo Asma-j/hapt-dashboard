@@ -8,6 +8,7 @@ import Footer from '../molecules/Footer';
 import StudentAddModal from '../molecules/modals/StudentAddModal';
 import StudentDeleteModal from '../molecules/modals/StudentDeleteModal';
 import StudentEditModal from '../molecules/modals/StudentEditModal';
+import { registerUser } from '../../actions/authentication';
 
 class StudentsPage extends Component {
   constructor(props) {
@@ -93,7 +94,11 @@ const mapStateToProps = store => ({
   students: store.students
 });
 
+const mapDispatchToProps = {
+  getAllStudents
+};
+
 export default connect(
   mapStateToProps,
-  { getAllStudents }
+  mapDispatchToProps
 )(StudentsPage);

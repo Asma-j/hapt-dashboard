@@ -8,6 +8,7 @@ import CourseAddModal from '../molecules/modals/CourseAddModal';
 import CourseEditModal from '../molecules/modals/CourseEditModal';
 import CourseDeleteModal from '../molecules/modals/CourseDeleteModal';
 import { getAllCourses } from '../../actions/courses';
+import { loginUser } from '../../actions/authentication';
 
 class CoursesPage extends Component {
   constructor(props) {
@@ -95,7 +96,11 @@ const mapStateToProps = store => ({
   courses: store.courses
 });
 
+const mapDispatchToProps = {
+  getAllCourses
+};
+
 export default connect(
   mapStateToProps,
-  { getAllCourses }
+  mapDispatchToProps
 )(CoursesPage);

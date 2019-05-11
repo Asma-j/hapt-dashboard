@@ -5,6 +5,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { editStudent, getAllStudents } from '../../../actions/students';
+import { editCourse } from '../../../actions/courses';
+import { getAllTrainers } from '../../../actions/trainers';
+import { getAllFormations } from '../../../actions/formations';
 
 class StudentEditModal extends Component {
   constructor(props) {
@@ -114,7 +117,12 @@ const mapStateToProps = store => ({
   students: store.students
 });
 
+const mapDispatchToProps = {
+  editStudent,
+  getAllStudents
+};
+
 export default connect(
   mapStateToProps,
-  { editStudent, getAllStudents }
+  mapDispatchToProps
 )(StudentEditModal);

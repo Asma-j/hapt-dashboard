@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { editFormation, getAllFormations } from '../../../actions/formations';
+import { deleteFormation, editFormation, getAllFormations } from '../../../actions/formations';
 
 class FormationEditModal extends Component {
   constructor(props) {
@@ -83,7 +83,12 @@ const mapStateToProps = store => ({
   formations: store.formations
 });
 
+const mapDispatchToProps = {
+  editFormation,
+  getAllFormations
+};
+
 export default connect(
   mapStateToProps,
-  { editFormation, getAllFormations }
+  mapDispatchToProps
 )(FormationEditModal);
