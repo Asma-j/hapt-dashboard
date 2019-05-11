@@ -1,4 +1,5 @@
 import axios from 'axios';
+import remoteAPI from '../utils/config';
 
 export const getAllFormations = () => dispatch => {
   dispatch({ type: 'FETCH_FORMATIONS_REQUEST' });
