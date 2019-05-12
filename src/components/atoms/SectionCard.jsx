@@ -6,7 +6,7 @@ class SectionCard extends Component {
   render() {
     const { title, image, link, disabled } = this.props;
     return (
-      <Link to={disabled || link} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to={disabled ? '/' : link} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Card className="mt-4 p-2 shadow-1" style={{ opacity: disabled ? 0.5 : 1 }}>
           <CardBody style={{ background: `url(${image}) right no-repeat` || '' }}>
             <CardTitle>

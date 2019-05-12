@@ -38,7 +38,7 @@ class Main extends Component {
               <SectionCard image={Trainer} title="Trainers" link="/trainers" />
             </Col>
             <Col md="4" xs="12">
-              <SectionCard image={Classrooms} title="Classrooms" link="/classrooms"  />
+              <SectionCard image={Classrooms} title="Classrooms" link="/classrooms" />
             </Col>
           </Row>
           <Row>

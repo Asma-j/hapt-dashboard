@@ -15,7 +15,7 @@ class ClassroomEditModal extends Component {
       number: null,
       name: null,
       capacity: null,
-      description: null,
+      description: null
     };
   }
 
@@ -27,7 +27,7 @@ class ClassroomEditModal extends Component {
 
   handleOnSubmit = async event => {
     event.preventDefault();
-    const { number, name, capacity, description} = this.state;
+    const { number, name, capacity, description } = this.state;
     const { classroom } = this.props;
     await this.props.editClassroom({
       _id: classroom._id,
@@ -52,7 +52,7 @@ class ClassroomEditModal extends Component {
   }
 
   render() {
-    const { isOpen, number, name, capacity, description} = this.state;
+    const { isOpen, number, name, capacity, description } = this.state;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -64,16 +64,9 @@ class ClassroomEditModal extends Component {
           </ModalHeader>
           <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
-            <FormGroup>
+              <FormGroup>
                 <Label for="number">Number</Label>
-                <Input
-                  disabled
-                  type="number"
-                  name="number"
-                  id="number"
-                  value={number}
-                  onChange={this.handleChange}
-                />
+                <Input disabled type="number" name="number" id="number" value={number} onChange={this.handleChange} />
               </FormGroup>
               <FormGroup>
                 <Label for="name">Name</Label>

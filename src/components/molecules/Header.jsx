@@ -37,7 +37,7 @@ class Header extends Component {
         <NavbarBrand tag={Link} to="/">
           <BrandLogo />
         </NavbarBrand>
-        {isAuthenticated ? (
+        {isAuthenticated && user ? (
           <Fragment>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={isOpen} navbar>

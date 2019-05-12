@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Header from '../molecules/Header';
 import { registerUser } from '../../actions/authentication';
 
+// ToDo: we'll remove this page when we add super.user auto create on API.
 class Register extends Component {
   constructor() {
     super();

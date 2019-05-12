@@ -5,7 +5,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteClassroom, getAllClassrooms } from '../../../actions/classrooms';
 
-
 class ClassroomDeleteModal extends Component {
   constructor(props) {
     super(props);
