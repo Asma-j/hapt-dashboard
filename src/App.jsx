@@ -40,13 +40,9 @@ class App extends Component {
         <Route exact path="/formations" component={FormationsPage} />
         <Route exact path="/students" component={StudentsPage} />
         <Route exact path="/trainers" component={TrainersPage} />
-<<<<<<< HEAD
         <Route exact path="/classrooms" component={ClassroomsPage} />
-        {/*<ProtectedRoute exact path="/trainers" component={TrainersPage} />*/}
-=======
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
->>>>>>> a2d2410f53d995bbec1254afb7f0c82d0b3c6e73
       </Router>
     );
   }
