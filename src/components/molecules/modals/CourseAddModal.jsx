@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { addCourse } from '../../../actions/courses';
+import { addCourse, getAllCourses } from '../../../actions/courses';
 import { getAllTrainers } from '../../../actions/trainers';
 import { getAllFormations } from '../../../actions/formations';
 
@@ -54,7 +54,11 @@ class CourseAddModal extends Component {
     event.preventDefault();
     const { title, tutor, formation } = this.state;
     await this.props.addCourse({ title, tutor, formation });
-    await this.props.getAllCourses();
+    if (this.props.formation) {
+      await this.props.getAllFormations();
+    } else {
+      await this.props.getAllCourses();
+    }
     this.setState({ isOpen: false });
   };
 
@@ -144,6 +148,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = {
   getAllFormations,
   getAllTrainers,
+  getAllCourses,
   addCourse
 };
 
