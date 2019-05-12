@@ -13,7 +13,7 @@ class ClassroomEditModal extends Component {
     this.state = {
       isOpen: false,
       number: null,
-      title: null,
+      name: null,
       capacity: null,
       description: null,
     };
@@ -27,12 +27,12 @@ class ClassroomEditModal extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const { number, title, capacity, description} = this.state;
+    const { number, name, capacity, description} = this.state;
     const { classroom } = this.props;
     this.props.editClassroom({
       _id: classroom._id,
       number,
-      title: capitaliseString(title),
+      name: capitaliseString(name),
       capacity,
       description: capitaliseString(description)
     });
@@ -45,14 +45,14 @@ class ClassroomEditModal extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       number: classroom.number,
-      title: classroom.title,
+      name: classroom.name,
       capacity: classroom.capacity,
       description: classroom.description
     }));
   }
 
   render() {
-    const { isOpen, number, title, capacity, description} = this.state;
+    const { isOpen, number, name, capacity, description} = this.state;
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
@@ -67,22 +67,22 @@ class ClassroomEditModal extends Component {
             <FormGroup>
                 <Label for="number">Number</Label>
                 <Input
+                  disabled
                   type="number"
                   name="number"
                   id="number"
-                  placeholder="Enter the Number.."
                   value={number}
                   onChange={this.handleChange}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="title">Title</Label>
+                <Label for="name">Name</Label>
                 <Input
                   type="text"
-                  name="title"
-                  id="title"
+                  name="name"
+                  id="name"
                   placeholder="Enter the Title.."
-                  value={title}
+                  value={name}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -113,7 +113,7 @@ class ClassroomEditModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button type="submit" color="warning" disabled={!number || !title || !capacity}>
+              <Button type="submit" color="warning" disabled={!number || !name || !capacity}>
                 Add
               </Button>
             </ModalFooter>

@@ -18,7 +18,7 @@ class ClassroomDeleteModal extends Component {
 
   handleOnSubmit = async () => {
     await this.props.deleteClassroom(this.props.classroom);
-    this.props.getAllClassrooms();
+    await this.props.getAllClassrooms();
     this.setState({ isOpen: false });
   };
 
@@ -38,7 +38,7 @@ class ClassroomDeleteModal extends Component {
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-danger text-white" toggle={this.handleOpenClose}>
-            <b>Delete classroom:</b> {classroom.firstName} {classroom.lastName}
+            <b>Delete classroom:</b> #{classroom.number}
           </ModalHeader>
           <ModalBody>Are you sure you want to delete this classroom?</ModalBody>
           <ModalFooter>

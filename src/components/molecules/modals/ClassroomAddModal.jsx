@@ -6,17 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { addClassroom, getAllClassrooms } from '../../../actions/classrooms';
 
-
 class ClassroomAddModal extends Component {
   constructor(props) {
     super(props);
     this.handleOpenClose = this.handleOpenClose.bind(this);
     this.state = {
       isOpen: false,
-      number: null,
-      title: null,
+      name: null,
       capacity: null,
-      description: null,
+      description: null
     };
   }
 
@@ -28,10 +26,9 @@ class ClassroomAddModal extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const { number, title, capacity, description} = this.state;
+    const { name, capacity, description } = this.state;
     this.props.addClassroom({
-      number,
-      title: capitaliseString(title),
+      name: capitaliseString(name),
       capacity,
       description: capitaliseString(description)
     });
@@ -42,15 +39,14 @@ class ClassroomAddModal extends Component {
   handleOpenClose() {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      number: '',
-      title: '',
+      name: '',
       capacity: '',
       description: ''
     }));
   }
 
   render() {
-    const { isOpen, number, title, capacity, description } = this.state;
+    const { isOpen, name, capacity, description } = this.state;
     return (
       <Fragment>
         <Button color="success" onClick={this.handleOpenClose} outline>
@@ -63,24 +59,13 @@ class ClassroomAddModal extends Component {
           <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
               <FormGroup>
-                <Label for="number">Number</Label>
-                <Input
-                  type="number"
-                  name="number"
-                  id="number"
-                  placeholder="Enter the Number.."
-                  value={number}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="title">Title</Label>
+                <Label for="name">Name</Label>
                 <Input
                   type="text"
-                  name="title"
-                  id="title"
+                  name="name"
+                  id="name"
                   placeholder="Enter the Title.."
-                  value={title}
+                  value={name}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -111,8 +96,8 @@ class ClassroomAddModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button type="submit" color="success" disabled={!number || !title || !capacity}>
-                Add
+              <Button type="submit" color="success" disabled={!title || !capacity}>
+                <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
           </Form>

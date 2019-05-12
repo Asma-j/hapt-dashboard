@@ -35,10 +35,10 @@ class ClassroomsPage extends Component {
                 <thead>
                   <tr>
                     <th>Number</th>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Capacity</th>
                     <th>Description</th>
-                    
+
                     <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
@@ -52,9 +52,9 @@ class ClassroomsPage extends Component {
                   ) : classrooms.length > 0 ? (
                     classrooms.map(classroom => (
                       <tr>
-                        <td>{classroom.number.toString().padStart(8, '0')}</td>
-                        <td>{classroom.title} </td>
-                        <td>{classroom.capacity.toString().padStart(8, '0')}</td>
+                        <td>#{classroom.number.toString().padStart(2, '0')}</td>
+                        <td>{classroom.name} </td>
+                        <td>{classroom.capacity} student(s)</td>
                         <td>{classroom.description}</td>
                         <td style={{ textAlign: 'right' }}>
                           <ButtonGroup>
