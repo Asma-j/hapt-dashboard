@@ -96,7 +96,7 @@ class ClassroomAddModal extends Component {
               <Button color="secondary" onClick={this.handleOpenClose}>
                 Cancel
               </Button>
-              <Button type="submit" color="success" disabled={!title || !capacity}>
+              <Button type="submit" color="success" disabled={!name || !capacity}>
                 <FontAwesomeIcon icon="plus" /> Add
               </Button>
             </ModalFooter>
