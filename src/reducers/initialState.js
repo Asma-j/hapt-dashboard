@@ -5,5 +5,6 @@ export default {
   courses: [],
   formations: [],
   sessions: [],
-  payments: []
+  payments: [],
+  classrooms: []
 };

@@ -12,6 +12,7 @@ import MainPage from './components/pages/MainPage';
 import CoursesPage from './components/pages/CoursesPage';
 import FormationsPage from './components/pages/FormationsPage';
 import StudentsPage from './components/pages/StudentsPage';
+import ClassroomsPage from './components/pages/ClassroomsPage';
 import TrainersPage from './components/pages/TrainersPage';
 import RegisterPage from './components/pages/RegisterPage';
 
@@ -45,6 +46,7 @@ const App = () => {
         <Route exact path="/formations" component={FormationsPage} />
         <Route exact path="/students" component={StudentsPage} />
         <Route exact path="/trainers" component={TrainersPage} />
+        <Route exact path="/classrooms" component={ClassroomsPage} />
         {/*<ProtectedRoute exact path="/trainers" component={TrainersPage} />*/}
       </Router>
     </Provider>

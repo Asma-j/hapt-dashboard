@@ -5,6 +5,7 @@ import formations from './formations';
 import courses from './courses';
 import trainers from './trainers';
 import students from './students';
+import classrooms from './classrooms';
 
 export default combineReducers({
   errors,
@@ -12,5 +13,6 @@ export default combineReducers({
   formations,
   trainers,
   students,
-  authentication
+  authentication,
+  classrooms
 });
