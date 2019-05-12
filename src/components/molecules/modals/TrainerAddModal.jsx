@@ -26,17 +26,17 @@ class TrainerAddModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email, tel, cin } = this.state;
-    this.props.addTrainer({
+    await this.props.addTrainer({
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
       email,
       tel,
       cin
     });
-    this.props.getAllTrainers();
+    await this.props.getAllTrainers();
     this.setState({ isOpen: false });
   };
 

@@ -26,11 +26,11 @@ class TrainerEditModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email, tel, cin } = this.state;
     const { trainer } = this.props;
-    this.props.editTrainer({
+    await this.props.editTrainer({
       _id: trainer._id,
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
@@ -38,7 +38,7 @@ class TrainerEditModal extends Component {
       tel,
       cin
     });
-    this.props.getAllTrainers();
+    await this.props.getAllTrainers();
     this.setState({ isOpen: false });
   };
 

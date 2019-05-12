@@ -24,15 +24,15 @@ class StudentAddModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email } = this.state;
-    this.props.addStudent({
+    await this.props.addStudent({
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
       email
     });
-    this.props.getAllStudents();
+    await this.props.getAllStudents();
     this.setState({ isOpen: false });
   };
 
