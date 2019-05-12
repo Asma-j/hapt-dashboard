@@ -51,7 +51,7 @@ class ClassroomsPage extends Component {
                     </tr>
                   ) : classrooms.length > 0 ? (
                     classrooms.map(classroom => (
-                      <tr>
+                      <tr key={classroom._id}>
                         <td>#{classroom.number.toString().padStart(2, '0')}</td>
                         <td>{classroom.name} </td>
                         <td>{classroom.capacity} student(s)</td>

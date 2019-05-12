@@ -51,7 +51,7 @@ class TrainersPage extends Component {
                     </tr>
                   ) : trainers.length > 0 ? (
                     trainers.map(trainer => (
-                      <tr>
+                      <tr key={trainer._id}>
                         <td>{trainer.cin.toString().padStart(8, '0')}</td>
                         <td>{trainer.firstName} </td>
                         <td>{trainer.lastName}</td>

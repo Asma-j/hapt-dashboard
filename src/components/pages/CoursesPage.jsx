@@ -50,7 +50,7 @@ class CoursesPage extends Component {
                     </tr>
                   ) : courses.length > 0 ? (
                     courses.map(course => (
-                      <tr>
+                      <tr key={course._id}>
                         <td>{course.number.toString().padStart(4, '0')}</td>
                         <td>{course.title}</td>
                         <td>{`${course.tutor.firstName} ${course.tutor.lastName}`}</td>

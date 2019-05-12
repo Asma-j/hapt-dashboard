@@ -59,7 +59,7 @@ class TrainerEditModal extends Component {
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Edit
+          <FontAwesomeIcon icon="edit" /> Edit
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>

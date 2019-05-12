@@ -56,11 +56,11 @@ class ClassroomEditModal extends Component {
     return (
       <Fragment>
         <Button color="warning" size="sm" onClick={this.handleOpenClose} outline>
-          <FontAwesomeIcon icon="plus" /> Edit
+          <FontAwesomeIcon icon="edit" /> Edit
         </Button>
         <Modal isOpen={isOpen} toggle={this.handleOpenClose}>
           <ModalHeader className="bg-warning" toggle={this.handleOpenClose}>
-            <b>Add classroom</b>
+            <b>Edit classroom</b> #{number}
           </ModalHeader>
           <Form onSubmit={this.handleOnSubmit}>
             <ModalBody>
@@ -114,7 +114,7 @@ class ClassroomEditModal extends Component {
                 Cancel
               </Button>
               <Button type="submit" color="warning" disabled={!number || !name || !capacity}>
-                Add
+                <FontAwesomeIcon icon="edit" /> Edit
               </Button>
             </ModalFooter>
           </Form>
