@@ -24,15 +24,15 @@ class ClassroomAddModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { name, capacity, description } = this.state;
-    this.props.addClassroom({
+    await this.props.addClassroom({
       name: capitaliseString(name),
       capacity,
       description: capitaliseString(description)
     });
-    this.props.getAllClassrooms();
+    await this.props.getAllClassrooms();
     this.setState({ isOpen: false });
   };
 

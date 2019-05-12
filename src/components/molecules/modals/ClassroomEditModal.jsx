@@ -25,18 +25,18 @@ class ClassroomEditModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { number, name, capacity, description} = this.state;
     const { classroom } = this.props;
-    this.props.editClassroom({
+    await this.props.editClassroom({
       _id: classroom._id,
       number,
       name: capitaliseString(name),
       capacity,
       description: capitaliseString(description)
     });
-    this.props.getAllClassrooms();
+    await this.props.getAllClassrooms();
     this.setState({ isOpen: false });
   };
 
