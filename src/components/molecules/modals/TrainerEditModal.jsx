@@ -5,7 +5,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
 import { editTrainer, getAllTrainers } from '../../../actions/trainers';
-import { deleteStudent, getAllStudents } from '../../../actions/students';
 
 class TrainerEditModal extends Component {
   constructor(props) {

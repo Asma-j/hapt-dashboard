@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteFormation, getAllFormations } from '../../../actions/formations';
-import { editStudent, getAllStudents } from '../../../actions/students';
 
 class FormationDeleteModal extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class FormationDeleteModal extends Component {
 
   handleOnSubmit = async () => {
     await this.props.deleteFormation(this.props.formation);
-    this.props.getAllFormations();
+    await this.props.getAllFormations();
     this.setState({ isOpen: false });
   };
 

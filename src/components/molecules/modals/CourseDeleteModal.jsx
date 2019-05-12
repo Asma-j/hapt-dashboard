@@ -17,7 +17,7 @@ class CourseDeleteModal extends Component {
 
   handleOnSubmit = async () => {
     await this.props.deleteCourse(this.props.course);
-    this.props.getAllCourses();
+    await this.props.getAllCourses();
     this.setState({ isOpen: false });
   };
 

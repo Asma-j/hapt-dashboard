@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { editCourse } from '../../../actions/courses';
-import { addTrainer, getAllTrainers } from '../../../actions/trainers';
+import { editCourse, getAllCourses } from '../../../actions/courses';
+import { getAllTrainers } from '../../../actions/trainers';
 import { getAllFormations } from '../../../actions/formations';
 
 class CourseEditModal extends Component {
@@ -20,6 +20,11 @@ class CourseEditModal extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getAllFormations();
+    this.props.getAllTrainers();
+  }
+
   handleChangeTitle = event => {
     this.setState({
       title: capitaliseString(event.target.value)
@@ -32,10 +37,12 @@ class CourseEditModal extends Component {
     });
   };
 
-  handleOnSubmit = async event => {
-    const { title, tutor, formation } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
-    await this.props.editCourse({ title, tutor, formation });
+    const { title, tutor, formation } = this.state;
+    this.props.editCourse({ title, tutor, formation });
+    this.props.getAllCourses();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
@@ -116,6 +123,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = {
   editCourse,
+  getAllCourses,
   getAllFormations,
   getAllTrainers
 };

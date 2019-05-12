@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { capitaliseString } from '../../../utils/tools';
-import { deleteFormation, editFormation, getAllFormations } from '../../../actions/formations';
+import { editFormation, getAllFormations } from '../../../actions/formations';
+import { getAllTrainers } from '../../../actions/trainers';
 
 class FormationEditModal extends Component {
   constructor(props) {
@@ -16,15 +17,19 @@ class FormationEditModal extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getAllTrainers();
+  }
+
   handleChangeTitle = event => {
     this.setState({
       title: capitaliseString(event.target.value)
     });
   };
 
-  handleOnSubmit = async event => {
-    const { title } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
+    const { title } = this.state;
     this.props.editFormation({ _id: this.props.formation._id, title: capitaliseString(title) });
     this.props.getAllFormations();
     this.setState({ isOpen: false });
@@ -80,12 +85,14 @@ class FormationEditModal extends Component {
 }
 
 const mapStateToProps = store => ({
-  formations: store.formations
+  formations: store.formations,
+  trainers: store.trainers
 });
 
 const mapDispatchToProps = {
   editFormation,
-  getAllFormations
+  getAllFormations,
+  getAllTrainers
 };
 
 export default connect(

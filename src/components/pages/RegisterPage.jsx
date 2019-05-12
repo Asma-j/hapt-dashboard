@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../molecules/Header';
 import { registerUser } from '../../actions/authentication';
-import { getAllFormations } from '../../actions/formations';
 
 class Register extends Component {
   constructor() {

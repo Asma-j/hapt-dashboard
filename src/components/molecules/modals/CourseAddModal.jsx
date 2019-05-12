@@ -20,6 +20,11 @@ class CourseAddModal extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.getAllFormations();
+    this.props.getAllTrainers();
+  }
+
   /**
    * @description This method makes it straightforward to modify or validate specific user input,
    * example we tried to capitalize the first character of the name.
@@ -45,10 +50,12 @@ class CourseAddModal extends Component {
    * @description This method save the new data and prevent the default page refresh.
    * @param event launched on form submitting.
    */
-  handleOnSubmit = async event => {
-    const { title, tutor, formation } = this.state;
+  handleOnSubmit = event => {
     event.preventDefault();
-    await this.props.addCourse({ title, tutor, formation });
+    const { title, tutor, formation } = this.state;
+    this.props.addCourse({ title, tutor, formation });
+    this.props.getAllCourses();
+    this.setState({ isOpen: false });
   };
 
   handleOpenClose() {
