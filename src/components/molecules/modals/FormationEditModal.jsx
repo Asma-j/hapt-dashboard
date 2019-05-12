@@ -27,11 +27,11 @@ class FormationEditModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { title } = this.state;
-    this.props.editFormation({ _id: this.props.formation._id, title: capitaliseString(title) });
-    this.props.getAllFormations();
+    await this.props.editFormation({ _id: this.props.formation._id, title: capitaliseString(title) });
+    await this.props.getAllFormations();
     this.setState({ isOpen: false });
   };
 

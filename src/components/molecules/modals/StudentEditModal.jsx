@@ -24,17 +24,17 @@ class StudentEditModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email } = this.state;
     const { student } = this.props;
-    this.props.editStudent({
+    await this.props.editStudent({
       _id: student._id,
       firstName: capitaliseString(firstName),
       lastName: capitaliseString(lastName),
       email
     });
-    this.props.getAllStudents();
+    await this.props.getAllStudents();
     this.setState({ isOpen: false });
   };
 

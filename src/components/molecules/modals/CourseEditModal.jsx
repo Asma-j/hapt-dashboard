@@ -37,11 +37,11 @@ class CourseEditModal extends Component {
     });
   };
 
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { title, tutor, formation } = this.state;
-    this.props.editCourse({ title, tutor, formation });
-    this.props.getAllCourses();
+    await this.props.editCourse({ title, tutor, formation });
+    await this.props.getAllCourses();
     this.setState({ isOpen: false });
   };
 

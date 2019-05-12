@@ -36,11 +36,11 @@ class FormationAddModal extends Component {
    * @description This method save the new data and prevent the default page refresh.
    * @param event launched on form submitting.
    */
-  handleOnSubmit = event => {
+  handleOnSubmit = async event => {
     event.preventDefault();
     const { title } = this.state;
-    this.props.addFormation({ title: capitaliseString(title) });
-    this.props.getAllFormations();
+    await this.props.addFormation({ title: capitaliseString(title) });
+    await this.props.getAllFormations();
     this.setState({ isOpen: false });
   };
 
