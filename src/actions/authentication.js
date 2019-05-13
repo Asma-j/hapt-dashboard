@@ -1,39 +1,27 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER, SET_CURRENT_USER_DATA } from './types';
+import { GET_ERRORS, SET_TOKEN, SET_AUTH_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import remoteAPI from '../utils/config';
 
-export const setCurrentUser = decoded => {
+export const setToken = decoded => {
   return {
-    type: SET_CURRENT_USER,
+    type: SET_TOKEN,
     payload: decoded
   };
 };
 
-export const registerUser = (user, history) => dispatch => {
+export const loginUser = credentials => dispatch => {
   axios
-    .post(`${remoteAPI}/register`, user)
-    .then(() => history.push('/login'))
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
-    });
-};
-
-export const loginUser = user => dispatch => {
-  axios
-    .post(`${remoteAPI}/signin`, user)
+    .post(`${remoteAPI}/signin`, credentials)
     .then(res => {
       const { token } = res.data;
-      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('token', token);
       setAuthToken(token);
       const decoded = jwtDecode(token);
-      dispatch(setCurrentUser(decoded));
+      dispatch(setToken(decoded));
       dispatch({
-        type: SET_CURRENT_USER_DATA,
+        type: SET_AUTH_USER,
         payload: res.data
       });
     })
@@ -45,9 +33,40 @@ export const loginUser = user => dispatch => {
     });
 };
 
+export const getAuthUser = history => dispatch => {
+  axios
+    .get(`${remoteAPI}/currentuser`)
+    .then(res => {
+      dispatch({
+        type: SET_AUTH_USER,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+      history.push('/login');
+    });
+};
+
 export const logoutUser = history => dispatch => {
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('token');
   setAuthToken(false);
-  dispatch(setCurrentUser({}));
+  dispatch(setToken({}));
   history.push('/login');
+};
+
+// ToDo: we'll remove this action when we add super.user auto create on API.
+export const registerUser = (user, history) => dispatch => {
+  axios
+    .post(`${remoteAPI}/register`, user)
+    .then(() => history.push('/login'))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };

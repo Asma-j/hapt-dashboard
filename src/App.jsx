@@ -7,7 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCog, faPlus, faTrash, faEdit, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authentication';
+import { setToken, logoutUser } from './actions/authentication';
 import LoginPage from './components/pages/LoginPage';
 import MainPage from './components/pages/MainPage';
 import CoursesPage from './components/pages/CoursesPage';
@@ -21,10 +21,10 @@ library.add(faCog, faPlus, faTrash, faEdit, faSignOutAlt, faUserPlus);
 
 class App extends Component {
   componentWillMount() {
-    if (localStorage.jwtToken) {
-      setAuthToken(localStorage.jwtToken);
-      const decoded = jwtDecode(localStorage.jwtToken);
-      store.dispatch(setCurrentUser(decoded));
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+      const decoded = jwtDecode(localStorage.token);
+      store.dispatch(setToken(decoded));
       if (decoded.exp < Date.now() / 1000) {
         store.dispatch(logoutUser());
         this.props.history.push('/login');

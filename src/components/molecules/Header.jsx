@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { logoutUser } from '../../actions/authentication';
+import { logoutUser, getAuthUser } from '../../actions/authentication';
 import BrandLogo from '../atoms/BrandLogo';
 import UserDefaultAvatar from '../../assets/images/user-13.svg';
 
@@ -16,6 +16,10 @@ class Header extends Component {
     this.state = {
       isOpen: false
     };
+  }
+
+  componentDidMount() {
+    this.props.getAuthUser();
   }
 
   onLogout(e) {
@@ -86,7 +90,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  logoutUser
+  logoutUser,
+  getAuthUser
 };
 
 export default connect(
